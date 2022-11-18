@@ -1,3 +1,5 @@
+// 'service' can be any functionality group together in one class
+
 import 'dart:math';
 import 'package:shared_shopping_list/models/shopping_list.dart';
 
