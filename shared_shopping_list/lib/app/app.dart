@@ -1,3 +1,6 @@
+// Here you can define the Routes. You can think of a Route as a Screen, but there can be some differences.
+// Here you can also register all the services, which then can be accessed as a Singleton thorough the whole app through Locator 
+
 import 'package:shared_shopping_list/UI/screens/create_new_shopping_list/create_new_shopping_list_view.dart';
 import 'package:shared_shopping_list/UI/screens/home/home_view.dart';
 import 'package:shared_shopping_list/UI/screens/shopping_list/shopping_list_view.dart';
