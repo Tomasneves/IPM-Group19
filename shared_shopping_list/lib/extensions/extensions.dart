@@ -1,3 +1,6 @@
+// With 'extensions' you can add your own custom functions to any classes. Even for basics like String and Int 
+// You always need to import this file if you want to use any extensions 
+
 export 'package:shared_shopping_list/extensions/date_time_extension.dart';
 export 'package:shared_shopping_list/extensions/base_view_model_extension.dart';
 export 'package:shared_shopping_list/extensions/reactive_service_mixin_extension.dart';
