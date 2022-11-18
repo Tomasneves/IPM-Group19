@@ -1,3 +1,5 @@
+// A 'model' is anything that represent some meaningful entity in our app. 
+
 class ShoppingList {
   final String shopName;
   final String ownerName;
