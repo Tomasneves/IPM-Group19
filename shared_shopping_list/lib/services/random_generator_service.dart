@@ -24,25 +24,25 @@ class RandomGeneratorService {
     'Sofia',
   ];
 
-  final allShopItems = [
-    'Milk 1L',
-    'Tomato sauce 200ml',
-    'Pasta 300g',
-    'Tomatoes 2x',
-    'Water 0.5L',
-    'Bread 1x',
-    'Eggs 6x',
-    'Butter 1x',
-    'Ham 15g',
-    'Toilet paper 10x',
-    'Salad 1x',
-  ];
+  final allShopItems = {
+    'Milk' : '1L',
+    'Tomato sauce' : '200ml',
+    'Pasta' : '300g',
+    'Tomatoes' : '2',
+    'Water' : '0.5L',
+    'Bread' : '1',
+    'Eggs' : '6',
+    'Butter' : '1',
+    'Ham' : '15g',
+    'Toilet paper' : '10',
+    'Salad' : '1',
+  };
 
   List<ShoppingList> generateShoppingLists() => List.generate(3, (index) => generateShoppingList());
 
   ShoppingList generateShoppingList() {
     return ShoppingList(
-      ownerName: generatePersonName(),
+      listName: "${generatePersonName()}'s list",
       shopName: generateShopName(),
       timeOfPlannedShopping: generateDateTimeInFuture(),
       items: generateShopItems(),
@@ -70,11 +70,9 @@ class RandomGeneratorService {
         .toList();
   }
 
-  List<String> generateShopItems({int minCount = 3}) {
-    final itemsCopied = [...allShopItems];
-    itemsCopied.shuffle();
-    return itemsCopied
-        .take(minCount + Random().nextInt(allShopItems.length - 1 - minCount))
-        .toList();
+  List<Item> generateShopItems({int minCount = 2}) {
+    var list = allShopItems.entries.map((e) => Item(itemName: e.key, amount: e.value, owner: generatePersonName())).toList();
+    list.shuffle();
+    return list.take(minCount + Random().nextInt(allShopItems.length - 1 - minCount)).toList();
   }
 }

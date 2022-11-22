@@ -14,7 +14,7 @@ dependencies:
   intl:
   persistent_bottom_nav_bar_v2:
     git:
-      url: git@github.com:Try-the-Colors/PersistentBottomNavBarV2.git
+      url: https://github.com/Try-the-Colors/PersistentBottomNavBarV2.git
       ref: v1.0.0
   flutter:
     sdk: flutter

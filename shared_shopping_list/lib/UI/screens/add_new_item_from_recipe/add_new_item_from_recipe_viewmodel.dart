@@ -2,16 +2,10 @@ import 'package:stacked/stacked.dart';
 import 'package:shared_shopping_list/app/app.locator.dart';
 import 'package:shared_shopping_list/app/app.router.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:shared_shopping_list/models/shopping_list.dart';
 
-class ShoppingListViewModel extends BaseViewModel {
+class AddNewItemFromRecipeViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
 
-  void goToAddNewItemScreen() {
-    _navigationService.navigateTo(Routes.addNewItemView);
-  }
-
-  void goToAddNewItemFromRecipeScreen() {
-    _navigationService.navigateTo(Routes.addNewItemFromRecipeView);
-  }
 
 }

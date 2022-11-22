@@ -6,13 +6,17 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:flutter/material.dart';
+import 'package:shared_shopping_list/UI/screens/add_new_item/add_new_item_view.dart'
+    as _i5;
+import 'package:shared_shopping_list/UI/screens/add_new_item_from_recipe/add_new_item_from_recipe_view.dart'
+    as _i6;
 import 'package:shared_shopping_list/UI/screens/create_new_shopping_list/create_new_shopping_list_view.dart'
     as _i4;
 import 'package:shared_shopping_list/UI/screens/home/home_view.dart' as _i2;
 import 'package:shared_shopping_list/UI/screens/shopping_list/shopping_list_view.dart'
     as _i3;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i5;
+import 'package:stacked_services/stacked_services.dart' as _i7;
 
 class Routes {
   static const homeView = '/';
@@ -21,10 +25,16 @@ class Routes {
 
   static const createNewShoppingListView = '/create-new-shopping-list-view';
 
+  static const addNewItemView = '/add-new-item-view';
+
+  static const addNewItemFromRecipeView = '/add-new-item-from-recipe-view';
+
   static const all = <String>{
     homeView,
     shoppingListView,
     createNewShoppingListView,
+    addNewItemView,
+    addNewItemFromRecipeView,
   };
 }
 
@@ -41,6 +51,14 @@ class StackedRouter extends _i1.RouterBase {
     _i1.RouteDef(
       Routes.createNewShoppingListView,
       page: _i4.CreateNewShoppingListView,
+    ),
+    _i1.RouteDef(
+      Routes.addNewItemView,
+      page: _i5.AddNewItemView,
+    ),
+    _i1.RouteDef(
+      Routes.addNewItemFromRecipeView,
+      page: _i6.AddNewItemFromRecipeView,
     ),
   ];
 
@@ -63,6 +81,18 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
+    _i5.AddNewItemView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => _i5.AddNewItemView(),
+        settings: data,
+      );
+    },
+    _i6.AddNewItemFromRecipeView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => _i6.AddNewItemFromRecipeView(),
+        settings: data,
+      );
+    },
   };
 
   @override
@@ -71,7 +101,7 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i5.NavigationService {
+extension NavigatorStateExtension on _i7.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -108,6 +138,34 @@ extension NavigatorStateExtension on _i5.NavigationService {
         transition,
   ]) async {
     return navigateTo<dynamic>(Routes.createNewShoppingListView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToAddNewItemView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.addNewItemView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> navigateToAddNewItemFromRecipeView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.addNewItemFromRecipeView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
