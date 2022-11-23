@@ -9,7 +9,8 @@ class ShoppingListsViewModel extends ReactiveViewModel {
   final _shoppingListsRepository = locator<ShoppingListsRepository>();
   final _navigationService = locator<NavigationService>();
 
-  List<ShoppingList> get allShoppingLists => _shoppingListsRepository.getAllShoppingLists();
+  List<ShoppingList> get allShoppingLists =>
+      _shoppingListsRepository.getAllShoppingLists();
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_shoppingListsRepository];
@@ -18,7 +19,7 @@ class ShoppingListsViewModel extends ReactiveViewModel {
     _navigationService.navigateTo(Routes.createNewShoppingListView);
   }
 
-  void goToShoppingListScreen(ShoppingList list) {
-    _navigationService.navigateToShoppingListView(currentList: list);
+  void goToShoppingListScreen(String id) {
+    _navigationService.navigateToShoppingListView(listId: id);
   }
 }

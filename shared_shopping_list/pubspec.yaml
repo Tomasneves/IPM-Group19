@@ -12,6 +12,7 @@ dependencies:
   stacked_services: ^0.9.5
   flutter_svg: ^1.1.0
   intl:
+  uuid:
   persistent_bottom_nav_bar_v2:
     git:
       url: https://github.com/Try-the-Colors/PersistentBottomNavBarV2.git

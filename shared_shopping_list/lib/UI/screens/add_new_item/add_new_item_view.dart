@@ -7,10 +7,9 @@ import 'package:shared_shopping_list/UI/global/blue_button.dart';
 import 'package:shared_shopping_list/UI/screens/shopping_list/shopping_list_viewmodel.dart';
 
 class AddNewItemView extends ViewModelBuilderWidget<AddNewItemViewModel> {
-  final ShoppingList currentList;
-  final ShoppingListViewModel shoppingListViewModel;
+  final String listId;
 
-  const AddNewItemView(this.currentList, this.shoppingListViewModel, {Key? key})
+  const AddNewItemView(this.listId, {Key? key})
       : super(key: key);
 
   @override
@@ -37,7 +36,7 @@ class AddNewItemView extends ViewModelBuilderWidget<AddNewItemViewModel> {
             child: Column(
               children: [
                 const SizedBox(height: 10),
-                ScreenHeader(text: currentList.listName),
+                ScreenHeader(text: viewModel.getListById(listId).listName),
                 const SizedBox(height: 30),
                 const Text("Item name:"),
                 const SizedBox(height: 10),
@@ -63,8 +62,7 @@ class AddNewItemView extends ViewModelBuilderWidget<AddNewItemViewModel> {
                     onTap: () => {
                           FocusManager.instance.primaryFocus?.unfocus(),
                           viewModel.addItem(
-                              shoppingListViewModel,
-                              currentList,
+                              listId,
                               Item(
                                   itemName: itemTextController.text.toString(),
                                   amount: amountTextController.text.toString(),

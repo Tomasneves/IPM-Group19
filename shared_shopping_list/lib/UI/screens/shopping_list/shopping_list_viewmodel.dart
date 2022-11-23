@@ -3,25 +3,29 @@ import 'package:stacked/stacked.dart';
 import 'package:shared_shopping_list/app/app.locator.dart';
 import 'package:shared_shopping_list/app/app.router.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:shared_shopping_list/extensions/extensions.dart';
+import 'package:shared_shopping_list/repositories/shopping_lists_repository.dart';
 
-class ShoppingListViewModel extends BaseViewModel {
+class ShoppingListViewModel extends ReactiveViewModel {
   final _navigationService = locator<NavigationService>();
+  final _shoppingListsRepository = locator<ShoppingListsRepository>();
 
-  void goToAddNewItemScreen(ShoppingList list, ShoppingListViewModel view) {
-    _navigationService.navigateToAddNewItemView(currentList: list, shoppingListViewModel: view);
+   @override
+  List<ReactiveServiceMixin> get reactiveServices => [_shoppingListsRepository];
+
+  void goToAddNewItemScreen(String id) {
+    _navigationService.navigateToAddNewItemView(listId: id);
   }
 
-  void goToAddNewItemFromRecipeScreen(ShoppingList list, ShoppingListViewModel view) {
-    _navigationService.navigateToAddNewItemFromRecipeView(currentList: list, shoppingListViewModel: view);
+  void goToAddNewItemFromRecipeScreen(String id) {
+    _navigationService.navigateToAddNewItemFromRecipeView(listId: id);
   }
 
-  void deleteRow(ShoppingList list, int index) {
-    setState(() => list.items.removeAt(index));
+  void deleteItem(String listId, int index) {
+    _shoppingListsRepository.deleteItemFromShoppingList(listId, index);
   }
 
-  void addItem(ShoppingList list, Item item) {
-    setState(() => list.items.add(item));
+  ShoppingList getListById(String id){
+    return _shoppingListsRepository.getListById(id);
   }
 
 }

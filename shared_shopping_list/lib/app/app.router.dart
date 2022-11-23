@@ -5,9 +5,8 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i8;
+import 'package:flutter/material.dart' as _i7;
 import 'package:flutter/material.dart';
-import 'package:shared_shopping_list/models/shopping_list.dart' as _i7;
 import 'package:shared_shopping_list/UI/screens/add_new_item/add_new_item_view.dart'
     as _i5;
 import 'package:shared_shopping_list/UI/screens/add_new_item_from_recipe/add_new_item_from_recipe_view.dart'
@@ -17,10 +16,8 @@ import 'package:shared_shopping_list/UI/screens/create_new_shopping_list/create_
 import 'package:shared_shopping_list/UI/screens/home/home_view.dart' as _i2;
 import 'package:shared_shopping_list/UI/screens/shopping_list/shopping_list_view.dart'
     as _i3;
-import 'package:shared_shopping_list/UI/screens/shopping_list/shopping_list_viewmodel.dart'
-    as _i9;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i10;
+import 'package:stacked_services/stacked_services.dart' as _i8;
 
 class Routes {
   static const homeView = '/';
@@ -76,8 +73,7 @@ class StackedRouter extends _i1.RouterBase {
     _i3.ShoppingListView: (data) {
       final args = data.getArgs<ShoppingListViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) =>
-            _i3.ShoppingListView(args.currentList, key: args.key),
+        builder: (context) => _i3.ShoppingListView(args.listId, key: args.key),
         settings: data,
       );
     },
@@ -90,9 +86,7 @@ class StackedRouter extends _i1.RouterBase {
     _i5.AddNewItemView: (data) {
       final args = data.getArgs<AddNewItemViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => _i5.AddNewItemView(
-            args.currentList, args.shoppingListViewModel,
-            key: args.key),
+        builder: (context) => _i5.AddNewItemView(args.listId, key: args.key),
         settings: data,
       );
     },
@@ -100,9 +94,8 @@ class StackedRouter extends _i1.RouterBase {
       final args =
           data.getArgs<AddNewItemFromRecipeViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => _i6.AddNewItemFromRecipeView(
-            args.currentList, args.shoppingListViewModel,
-            key: args.key),
+        builder: (context) =>
+            _i6.AddNewItemFromRecipeView(args.listId, key: args.key),
         settings: data,
       );
     },
@@ -116,44 +109,38 @@ class StackedRouter extends _i1.RouterBase {
 
 class ShoppingListViewArguments {
   const ShoppingListViewArguments({
-    required this.currentList,
+    required this.listId,
     this.key,
   });
 
-  final _i7.ShoppingList currentList;
+  final String listId;
 
-  final _i8.Key? key;
+  final _i7.Key? key;
 }
 
 class AddNewItemViewArguments {
   const AddNewItemViewArguments({
-    required this.currentList,
-    required this.shoppingListViewModel,
+    required this.listId,
     this.key,
   });
 
-  final _i7.ShoppingList currentList;
+  final String listId;
 
-  final _i9.ShoppingListViewModel shoppingListViewModel;
-
-  final _i8.Key? key;
+  final _i7.Key? key;
 }
 
 class AddNewItemFromRecipeViewArguments {
   const AddNewItemFromRecipeViewArguments({
-    required this.currentList,
-    required this.shoppingListViewModel,
+    required this.listId,
     this.key,
   });
 
-  final _i7.ShoppingList currentList;
+  final String listId;
 
-  final _i9.ShoppingListViewModel shoppingListViewModel;
-
-  final _i8.Key? key;
+  final _i7.Key? key;
 }
 
-extension NavigatorStateExtension on _i10.NavigationService {
+extension NavigatorStateExtension on _i8.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -169,8 +156,8 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> navigateToShoppingListView({
-    required _i7.ShoppingList currentList,
-    _i8.Key? key,
+    required String listId,
+    _i7.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -178,8 +165,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition,
   }) async {
     return navigateTo<dynamic>(Routes.shoppingListView,
-        arguments:
-            ShoppingListViewArguments(currentList: currentList, key: key),
+        arguments: ShoppingListViewArguments(listId: listId, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -201,9 +187,8 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> navigateToAddNewItemView({
-    required _i7.ShoppingList currentList,
-    required _i9.ShoppingListViewModel shoppingListViewModel,
-    _i8.Key? key,
+    required String listId,
+    _i7.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -211,10 +196,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition,
   }) async {
     return navigateTo<dynamic>(Routes.addNewItemView,
-        arguments: AddNewItemViewArguments(
-            currentList: currentList,
-            shoppingListViewModel: shoppingListViewModel,
-            key: key),
+        arguments: AddNewItemViewArguments(listId: listId, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -222,9 +204,8 @@ extension NavigatorStateExtension on _i10.NavigationService {
   }
 
   Future<dynamic> navigateToAddNewItemFromRecipeView({
-    required _i7.ShoppingList currentList,
-    required _i9.ShoppingListViewModel shoppingListViewModel,
-    _i8.Key? key,
+    required String listId,
+    _i7.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -232,10 +213,7 @@ extension NavigatorStateExtension on _i10.NavigationService {
         transition,
   }) async {
     return navigateTo<dynamic>(Routes.addNewItemFromRecipeView,
-        arguments: AddNewItemFromRecipeViewArguments(
-            currentList: currentList,
-            shoppingListViewModel: shoppingListViewModel,
-            key: key),
+        arguments: AddNewItemFromRecipeViewArguments(listId: listId, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

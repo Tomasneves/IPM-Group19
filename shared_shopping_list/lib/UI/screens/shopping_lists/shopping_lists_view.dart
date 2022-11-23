@@ -33,7 +33,7 @@ class ShoppingListsView extends ViewModelBuilderWidget<ShoppingListsViewModel> {
                 children: viewModel.allShoppingLists
                     .map(
                       (e) => InkWell(
-                        onTap: () => viewModel.goToShoppingListScreen(e),
+                        onTap: () => viewModel.goToShoppingListScreen(e.id),
                         child: RoundedOutlinedCard(
                           title: e.listName,
                           content: ShoppingListBriefInfo(

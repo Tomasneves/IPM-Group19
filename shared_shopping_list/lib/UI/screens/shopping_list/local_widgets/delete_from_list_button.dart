@@ -5,9 +5,9 @@ import 'package:shared_shopping_list/models/shopping_list.dart';
 class DeleteFromListButton extends StatelessWidget {
   final int id;
   final Function deletePress;
-  final ShoppingList list;
+  final String listId;
 
-  const DeleteFromListButton({super.key, required this.list, required this.id, required this.deletePress});
+  const DeleteFromListButton({super.key, required this.listId, required this.id, required this.deletePress});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class DeleteFromListButton extends StatelessWidget {
       width: 30,
       child: TextButton(
         onPressed: () {
-          deletePress(list, id);          
+          deletePress(listId, id);          
         },
         child: Text("x", style: TextStyle(color: Colors.red,)),
       )
