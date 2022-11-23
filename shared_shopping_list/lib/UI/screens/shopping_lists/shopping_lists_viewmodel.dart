@@ -19,7 +19,6 @@ class ShoppingListsViewModel extends ReactiveViewModel {
   }
 
   void goToShoppingListScreen(ShoppingList list) {
-    _navigationService.navigateTo(Routes.shoppingListView, arguments: list);
-    //_navigationService.navigateToShoppingListView(currentList: list);
+    _navigationService.navigateToShoppingListView(currentList: list);
   }
 }

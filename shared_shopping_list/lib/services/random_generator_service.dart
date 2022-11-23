@@ -41,12 +41,15 @@ class RandomGeneratorService {
   List<ShoppingList> generateShoppingLists() => List.generate(3, (index) => generateShoppingList());
 
   ShoppingList generateShoppingList() {
+    final owner = generatePersonName();
     return ShoppingList(
-      listName: "${generatePersonName()}'s list",
+      ownerName: owner,
+      listName: "$owner's list",
       shopName: generateShopName(),
       timeOfPlannedShopping: generateDateTimeInFuture(),
       items: generateShopItems(),
       participantNames: generatePersonsNames(),
+      currentShopper: owner,
     );
   }
 

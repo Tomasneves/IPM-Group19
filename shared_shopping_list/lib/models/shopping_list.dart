@@ -15,17 +15,21 @@ class Item {
 }
 
 class ShoppingList {
+  final String ownerName;
   final String shopName;
   final String listName;
   final DateTime timeOfPlannedShopping;
   final List<Item> items;
   final List<String> participantNames;
+  final String currentShopper;
 
   ShoppingList({
+    required this.ownerName,
     required this.listName,
     required this.shopName,
     required this.timeOfPlannedShopping,
     required this.items,
     required this.participantNames,
+    required this.currentShopper,
   });
 }
