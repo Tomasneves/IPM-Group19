@@ -371,11 +371,9 @@ packages:
   persistent_bottom_nav_bar_v2:
     dependency: "direct main"
     description:
-      path: "."
-      ref: "v1.0.0"
-      resolved-ref: "47bb6450ecc3cf4dcb472662646b4d701c522bca"
-      url: "git@github.com:Try-the-Colors/PersistentBottomNavBarV2.git"
-    source: git
+      path: PersistentBottomNavBarV2-master
+      relative: true
+    source: path
     version: "4.1.1"
   petitparser:
     dependency: transitive
