@@ -11,7 +11,7 @@ class ShoppingListsView extends ViewModelBuilderWidget<ShoppingListsViewModel> {
 
   @override
   ShoppingListsViewModel viewModelBuilder(BuildContext context) => ShoppingListsViewModel();
-
+ 
   @override
   Widget builder(BuildContext context, ShoppingListsViewModel viewModel, Widget? child) {
     return Scaffold(
@@ -32,10 +32,13 @@ class ShoppingListsView extends ViewModelBuilderWidget<ShoppingListsViewModel> {
               Column(
                 children: viewModel.allShoppingLists
                     .map(
-                      (e) => RoundedOutlinedCard(
-                        title: "${e.ownerName}'s shopping list",
-                        content: ShoppingListBriefInfo(
-                          shoppingList: e,
+                      (e) => InkWell(
+                        onTap: () => viewModel.goToShoppingListScreen(e.id),
+                        child: RoundedOutlinedCard(
+                          title: e.listName,
+                          content: ShoppingListBriefInfo(
+                            shoppingList: e,
+                          ),
                         ),
                       ),
                     )
