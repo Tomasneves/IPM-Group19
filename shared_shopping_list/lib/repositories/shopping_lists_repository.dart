@@ -26,6 +26,15 @@ class ShoppingListsRepository with ReactiveServiceMixin {
     });
   }
 
+  void removeParticipantFromShoppingList(String id, int index) {
+    setState(() {
+      _allShoppingLists
+          .singleWhere((element) => element.id == id)
+          .items
+          .removeAt(index);
+    });
+  }
+
   void addItemToShoppingList(String id, Item item) {
     setState(() {
       _allShoppingLists
