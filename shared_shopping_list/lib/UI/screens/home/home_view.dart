@@ -15,7 +15,11 @@ class HomeView extends ViewModelBuilderWidget<HomeViewModel> {
   HomeViewModel viewModelBuilder(BuildContext context) => HomeViewModel();
 
   List<Widget> getPages(Map<Type, NavBarItem> allowedPages) {
-    return [const RecipesListView(), const ShoppingListsView(), const SettingsView()];
+    return [
+      const RecipesListView(),
+      const ShoppingListsView(),
+      const SettingsView()
+    ];
   }
 
   List<PersistentBottomNavBarItem> getNavBarItems(Map<Type, NavBarItem> pages) {
@@ -82,7 +86,8 @@ class HomeView extends ViewModelBuilderWidget<HomeViewModel> {
           curve: Curves.ease,
           duration: Duration(milliseconds: 200),
         ),
-        navBarStyle: NavBarStyle.style3, // Choose the nav bar style with this property.
+        navBarStyle:
+            NavBarStyle.style3, // Choose the nav bar style with this property.
       ),
     );
   }
