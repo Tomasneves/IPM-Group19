@@ -1,6 +1,5 @@
 // A 'model' is anything that represent some meaningful entity in our app.
 
-import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class Item {

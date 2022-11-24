@@ -9,6 +9,7 @@
 import 'package:stacked_core/stacked_core.dart';
 import 'package:stacked_services/src/navigation/navigation_service.dart';
 
+import '../repositories/recipes_repository.dart';
 import '../repositories/shopping_lists_repository.dart';
 import '../services/random_generator_service.dart';
 
@@ -23,5 +24,6 @@ Future<void> setupLocator(
 // Register dependencies
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => ShoppingListsRepository());
+  locator.registerLazySingleton(() => RecipesRepository());
   locator.registerLazySingleton(() => RandomGeneratorService());
 }

@@ -13,7 +13,6 @@ import 'package:flutter/cupertino.dart';
 import '../../../constants/custom_colors.dart';
 import '../../global/default_button.dart';
 import '../shopping_list/local_widgets/delete_from_list_button.dart';
-import '../shopping_list/local_widgets/remove_from_list_button.dart';
 
 class CreateNewShoppingListView extends ViewModelBuilderWidget<CreateNewShoppingListViewModel> {
   const CreateNewShoppingListView({Key? key}) : super(key: key);

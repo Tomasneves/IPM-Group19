@@ -9,8 +9,7 @@ import 'package:shared_shopping_list/UI/screens/shopping_list/shopping_list_view
 class AddNewItemView extends ViewModelBuilderWidget<AddNewItemViewModel> {
   final String listId;
 
-  const AddNewItemView(this.listId, {Key? key})
-      : super(key: key);
+  const AddNewItemView(this.listId, {Key? key}) : super(key: key);
 
   @override
   AddNewItemViewModel viewModelBuilder(BuildContext context) =>
@@ -32,7 +31,7 @@ class AddNewItemView extends ViewModelBuilderWidget<AddNewItemViewModel> {
         },
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.only(left: 20),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             child: Column(
               children: [
                 const SizedBox(height: 10),
