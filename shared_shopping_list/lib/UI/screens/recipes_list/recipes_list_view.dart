@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:shared_shopping_list/UI/screens/recipes_list/recipes_list_viewmodel.dart';
 import 'package:shared_shopping_list/UI/global/green_button.dart';
@@ -18,68 +20,101 @@ class RecipesListView extends ViewModelBuilderWidget<RecipesListViewModel> {
   Widget builder(
       BuildContext context, RecipesListViewModel viewModel, Widget? child) {
     return Scaffold(
-      body: SafeArea(
-        bottom: false,
+      body: Container(
+        alignment: Alignment.topCenter,
         child: SingleChildScrollView(
-          child: Column(children: [
-            const SizedBox(height: 60),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const ScreenHeader(text: 'Adding New Item'),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const ScreenHeader(text: 'To x Recipie'),
-              ],
-            ),
-            const SizedBox(height: 60),
-            const SizedBox(
-              width: 299,
-              child: TextField(
-                style: TextStyle(height: 0.7),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(width: 3, color: Colors.grey)),
-                  hintText: 'Item Description',
-                  filled: true,
-                  fillColor: Colors.grey,
+          child: SizedBox(
+            width: 339,
+            child: Column(children: [
+              const SizedBox(height: 140),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  const ScreenHeader(text: 'Adding New Item'),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    'To Lasagna Recipie',
+                    style: TextStyle(color: Colors.grey, fontSize: 20),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 40),
+              const SizedBox(
+                width: 339,
+                child: TextField(
+                  style: TextStyle(height: 1),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(width: 3, color: Colors.white)),
+                    hintText: 'Item Description',
+                    hintStyle: TextStyle(color: Colors.white),
+                    filled: true,
+                    fillColor: Color.fromARGB(255, 198, 198, 198),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 30),
-            const SizedBox(
-              width: 299,
-              child: const Text(
-                'Suggestions:',
-                style: TextStyle(color: Colors.grey),
+              const SizedBox(height: 30),
+              const SizedBox(
+                width: 339,
+                child: const Text(
+                  'Suggestions:',
+                  style: TextStyle(color: Colors.grey),
+                ),
               ),
-            ),
-            const SizedBox(height: 20),
-            const SizedBox(
-              width: 299,
-              child: Text(
-                'Tomato Sauce 200ml',
-                style: TextStyle(backgroundColor: Colors.grey),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Color.fromARGB(255, 198, 198, 198),
+                    ),
+                    onPressed: () {},
+                    child: const Text('Tomato Sauce 200ml'),
+                  ),
+                ],
               ),
-            ),
-            const SizedBox(
-              width: 299,
-              child: Text(
-                'Tomato Sauce 200ml',
-                style: TextStyle(backgroundColor: Colors.grey),
+              Row(
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Color.fromARGB(255, 198, 198, 198),
+                    ),
+                    onPressed: () {},
+                    child: const Text('Pasta 300g'),
+                  ),
+                ],
               ),
-            ),
-            const SizedBox(
-              width: 299,
-              child: Text(
-                'Tomato Sauce 200ml',
-                style: TextStyle(backgroundColor: Colors.grey),
+              Row(
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Color.fromARGB(255, 198, 198, 198),
+                    ),
+                    onPressed: () {},
+                    child: const Text('Olive Oil 500ml'),
+                  ),
+                ],
               ),
-            ),
-          ]),
+              SizedBox(height: 70),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.blue,
+                      padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                    ),
+                    onPressed: () {},
+                    child: const Text('Done'),
+                  ),
+                ],
+              ),
+            ]),
+          ),
         ),
       ),
     );

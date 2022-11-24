@@ -14,13 +14,8 @@ dependencies:
   intl:
   uuid:
   persistent_bottom_nav_bar_v2:
-<<<<<<< HEAD
     path: ./PersistentBottomNavBarV2-master    
-=======
-    git:
-      url: https://github.com/Try-the-Colors/PersistentBottomNavBarV2.git
-      ref: v1.0.0
->>>>>>> 6d35a77997a79bd6c5143975fd67a821884b15ed
+
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
