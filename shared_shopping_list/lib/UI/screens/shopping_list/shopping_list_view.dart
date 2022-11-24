@@ -18,8 +18,9 @@ class ShoppingListView extends ViewModelBuilderWidget<ShoppingListViewModel> {
       ShoppingListViewModel();
 
   @override
-  Widget builder(
-      BuildContext context, ShoppingListViewModel viewModel, Widget? child) {
+  Widget builder(BuildContext context, ShoppingListViewModel viewModel, Widget? child) {
+    final list = viewModel.getListById(listId);
+
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
@@ -32,7 +33,7 @@ class ShoppingListView extends ViewModelBuilderWidget<ShoppingListViewModel> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  ScreenHeader(text: viewModel.getListById(listId).listName),
+                  ScreenHeader(text: list.listName),
                   GreenButton(
                       text: 'Edit list',
                       onTap: () {
@@ -49,13 +50,13 @@ class ShoppingListView extends ViewModelBuilderWidget<ShoppingListViewModel> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  viewModel.getListById(listId).timeOfPlannedShopping
+                  list.timeOfPlannedShopping
                       .defaultDateTimeFormat(MaterialLocalizations.of(context)),
                   style: const TextStyle(fontSize: 14),
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  '${viewModel.getListById(listId).participantNames.length} participants',
+                  '${list.participantNames.length} participants',
                   style: const TextStyle(fontSize: 14),
                 ),
                 const SizedBox(height: 4),
@@ -68,7 +69,7 @@ class ShoppingListView extends ViewModelBuilderWidget<ShoppingListViewModel> {
                       children: <TextSpan>[
                         const TextSpan(text: 'Next person to go to shop: '),
                         TextSpan(
-                            text: viewModel.getListById(listId).currentShopper,
+                            text: list.currentShopper,
                             style: const TextStyle(
                                 fontSize: 17.0, fontWeight: FontWeight.bold)),
                       ]),
@@ -105,18 +106,19 @@ class ShoppingListView extends ViewModelBuilderWidget<ShoppingListViewModel> {
                         ),
                         DataColumn(label: Text(' '))
                       ],
-                      rows: viewModel.getListById(listId).items
+                      rows: list.items
                           .map((e) => DataRow(cells: <DataCell>[
                                 DataCell(Text(e.itemName)),
                                 DataCell(Text(e.amount)),
                                 DataCell(Text(e.owner)),
                                 DataCell(DeleteFromListButton(
                                   listId: listId,
-                                  id: viewModel.getListById(listId).items.indexOf(e),
+                                  id: list.items.indexOf(e),
                                   deletePress: viewModel.deleteItem,
                                 ))
                               ]))
-                          .toList()),
+                          .toList(),
+                  ),
                 ),
               ),
               const SizedBox(height: 10),

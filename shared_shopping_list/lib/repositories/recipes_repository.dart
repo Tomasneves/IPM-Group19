@@ -12,6 +12,26 @@ class RecipesRepository with ReactiveServiceMixin {
   final _randomGeneratorService = locator<RandomGeneratorService>();
   late final _allRecipes =
       _randomGeneratorService.generateRecipes();
+  
+  late final List<bool> selectedRows = []; 
+
+  List<bool> getSelectedRows(){
+    return selectedRows;
+  }
+
+  void changeSelecedRows(int index){
+    setState(() {
+      selectedRows[index] = !selectedRows[index];
+    });
+  }
+
+  void setSelectedRows(String recipeId){
+    selectedRows.addAll(List.filled(getRecipeById(recipeId).items.length, true));
+  }
+
+  void unsetSelectedRows(){
+    selectedRows.clear();
+  }
 
   List<Recipe> getAllRecipes() {
     return _allRecipes;

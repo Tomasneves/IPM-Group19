@@ -20,6 +20,7 @@ class AddNewItemView extends ViewModelBuilderWidget<AddNewItemViewModel> {
       BuildContext context, AddNewItemViewModel viewModel, Widget? child) {
     TextEditingController itemTextController = TextEditingController();
     TextEditingController amountTextController = TextEditingController();
+    final list = viewModel.getListById(listId);
 
     return Scaffold(
       appBar: AppBar(),
@@ -35,7 +36,7 @@ class AddNewItemView extends ViewModelBuilderWidget<AddNewItemViewModel> {
             child: Column(
               children: [
                 const SizedBox(height: 10),
-                ScreenHeader(text: viewModel.getListById(listId).listName),
+                ScreenHeader(text: list.listName),
                 const SizedBox(height: 30),
                 const Text("Item name:"),
                 const SizedBox(height: 10),

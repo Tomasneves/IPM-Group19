@@ -7,12 +7,14 @@ import 'package:shared_shopping_list/models/recipe.dart';
 import 'package:shared_shopping_list/repositories/shopping_lists_repository.dart';
 import 'package:shared_shopping_list/repositories/recipes_repository.dart';
 
-class AddNewItemFromRecipeViewModel extends ReactiveViewModel {
+class ChooseItemFromRecipeViewModel extends ReactiveViewModel {
   final _navigationService = locator<NavigationService>();
   final _shoppingListsRepository = locator<ShoppingListsRepository>();
   final _recipesRepository = locator<RecipesRepository>();
-
+  
+  
   List<Recipe> get allRecipes => _recipesRepository.getAllRecipes();
+  
 
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_recipesRepository];
@@ -29,9 +31,27 @@ class AddNewItemFromRecipeViewModel extends ReactiveViewModel {
     return _recipesRepository.getRecipeById(id);
   }
 
-  void goToChooseItemFromRecipeScreen(String listId, String recipeId) {
-    _recipesRepository.unsetSelectedRows();
-    _recipesRepository.setSelectedRows(recipeId);
-    _navigationService.navigateToChooseItemFromRecipeView(listId: listId, recipeId: recipeId);
+  List<bool> getSelectedRows(){
+    return _recipesRepository.getSelectedRows();
+  }
+
+  void changeSelecedRows(int index){
+    _recipesRepository.changeSelecedRows(index);
+  }
+
+  void addSelectedItemsAndGoBack(String listId, String recipeId){
+    List<Item> items = [];
+    //print(_recipesRepository.getSelectedRows().length);
+    for (var i = 0; i < _recipesRepository.getSelectedRows().length; i++){
+      if (_recipesRepository.getSelectedRows()[i]){
+        final temp = _recipesRepository.getRecipeById(recipeId).items[i];
+        items.add(Item(itemName: temp.itemName, amount: temp.itemAmount, owner: "You"));
+      }
+    }
+    
+    _shoppingListsRepository.addItemsToShoppingList(listId, items);
+
+    _navigationService.back();
+    _navigationService.back();
   }
 }

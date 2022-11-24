@@ -17,19 +17,18 @@ class AddNewItemFromRecipeView
 
   @override
   Widget builder(BuildContext context, AddNewItemFromRecipeViewModel viewModel, Widget? child) {
-    
+    final list = viewModel.getListById(listId);
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-          //bottom: false,
           child: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),
         child: Column(
           children: [
             const SizedBox(height: 10),
-            ScreenHeader(text: viewModel.getListById(listId).listName),
+            ScreenHeader(text: list.listName),
             const SizedBox(height: 30),
-            const Text("Select recipe to open", style: const TextStyle(fontSize: 18),),
+            const Text("Select recipe to open", style: TextStyle(fontSize: 18),),
             const SizedBox(height: 30),
             Expanded(
               child: GridView.count( 
@@ -41,7 +40,7 @@ class AddNewItemFromRecipeView
                 children: viewModel.allRecipes
                     .map(
                       (e) => InkWell(
-                        onTap: () => print(e.recipeName),
+                        onTap: () => viewModel.goToChooseItemFromRecipeScreen(listId, e.id),
                         child: RecipeBox(recipe: e, ),
                       ),
                     )

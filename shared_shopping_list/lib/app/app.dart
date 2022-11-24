@@ -6,6 +6,7 @@ import 'package:shared_shopping_list/UI/screens/home/home_view.dart';
 import 'package:shared_shopping_list/UI/screens/shopping_list/shopping_list_view.dart';
 import 'package:shared_shopping_list/UI/screens/add_new_item/add_new_item_view.dart';
 import 'package:shared_shopping_list/UI/screens/add_new_item_from_recipe/add_new_item_from_recipe_view.dart';
+import 'package:shared_shopping_list/UI/screens/add_new_item_from_recipe/choose_item_from_recipe_view.dart';
 import 'package:shared_shopping_list/repositories/recipes_repository.dart';
 import 'package:shared_shopping_list/repositories/shopping_lists_repository.dart';
 import 'package:shared_shopping_list/services/random_generator_service.dart';
@@ -22,6 +23,7 @@ import 'package:stacked_services/stacked_services.dart';
   MaterialRoute(page: CreateNewShoppingListView),
   MaterialRoute(page: AddNewItemView),
   MaterialRoute(page: AddNewItemFromRecipeView),
+  MaterialRoute(page: ChooseItemFromRecipeView),
 ], dependencies: [
   LazySingleton(classType: NavigationService),
   LazySingleton(classType: ShoppingListsRepository),
