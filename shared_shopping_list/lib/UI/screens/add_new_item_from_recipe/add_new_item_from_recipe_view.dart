@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_shopping_list/UI/global/recipe_box.dart';
 import 'package:shared_shopping_list/UI/screens/add_new_item_from_recipe/add_new_item_from_recipe_viewmodel.dart';
-import 'package:shared_shopping_list/models/recipe.dart';
 import 'package:stacked/stacked.dart';
 import 'package:shared_shopping_list/UI/global/screen_header.dart';
 
@@ -16,7 +15,8 @@ class AddNewItemFromRecipeView
       AddNewItemFromRecipeViewModel();
 
   @override
-  Widget builder(BuildContext context, AddNewItemFromRecipeViewModel viewModel, Widget? child) {
+  Widget builder(BuildContext context, AddNewItemFromRecipeViewModel viewModel,
+      Widget? child) {
     final list = viewModel.getListById(listId);
     return Scaffold(
       appBar: AppBar(),
@@ -28,10 +28,13 @@ class AddNewItemFromRecipeView
             const SizedBox(height: 10),
             ScreenHeader(text: list.listName),
             const SizedBox(height: 30),
-            const Text("Select recipe to open", style: TextStyle(fontSize: 18),),
+            const Text(
+              "Select recipe to open",
+              style: TextStyle(fontSize: 18),
+            ),
             const SizedBox(height: 30),
             Expanded(
-              child: GridView.count( 
+              child: GridView.count(
                 primary: false,
                 childAspectRatio: (1 / .7),
                 crossAxisCount: 2,
@@ -40,8 +43,11 @@ class AddNewItemFromRecipeView
                 children: viewModel.allRecipes
                     .map(
                       (e) => InkWell(
-                        onTap: () => viewModel.goToChooseItemFromRecipeScreen(listId, e.id),
-                        child: RecipeBox(recipe: e, ),
+                        onTap: () => viewModel.goToChooseItemFromRecipeScreen(
+                            listId, e.id),
+                        child: RecipeBox(
+                          recipe: e,
+                        ),
                       ),
                     )
                     .toList(),
