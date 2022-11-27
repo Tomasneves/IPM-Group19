@@ -1,20 +1,29 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:shared_shopping_list/UI/screens/recipes_list/create_new_recipe_viewmodel.dart';
 import 'package:shared_shopping_list/UI/screens/recipes_list/recipes_list_view.dart';
 import 'package:shared_shopping_list/UI/global/green_button.dart';
 import 'package:shared_shopping_list/UI/global/rounded_outlined_card.dart';
 import 'package:shared_shopping_list/UI/global/screen_header.dart';
 import 'package:shared_shopping_list/UI/screens/shopping_lists/local_widgets/shopping_list_brief_info.dart';
-import 'package:shared_shopping_list/UI/screens/shopping_lists/shopping_lists_viewmodel.dart';
+import 'package:shared_shopping_list/UI/screens/recipes_list/create_new_recipe_viewmodel.dart';
 import 'package:shared_shopping_list/UI/screens/recipes_list/add_new_item_to_recipe.dart';
 import 'package:stacked/stacked.dart';
 
-class CreateNewRecipeView extends StatelessWidget {
-  const CreateNewRecipeView({super.key});
+class CreateNewRecipeView
+    extends ViewModelBuilderWidget<CreateNewRecipeViewModel> {
+  CreateNewRecipeView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  CreateNewRecipeViewModel viewModelBuilder(BuildContext context) =>
+      CreateNewRecipeViewModel();
+
+  @override
+  Widget builder(
+      BuildContext context, CreateNewRecipeViewModel viewModel, Widget? child) {
+    TextEditingController recipeNameController = TextEditingController();
+
     return Scaffold(
       body: Container(
         alignment: Alignment.topCenter,
@@ -31,7 +40,7 @@ class CreateNewRecipeView extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push(
                             MaterialPageRoute(builder: (BuildContext context) {
-                          return FirstPage();
+                          return RecipesListView();
                         }));
                       },
                       child: const Icon(
@@ -51,7 +60,7 @@ class CreateNewRecipeView extends StatelessWidget {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
                     'Recipe Name:',
                     style: TextStyle(color: Colors.grey, fontSize: 20),
@@ -63,6 +72,7 @@ class CreateNewRecipeView extends StatelessWidget {
                     width: 189,
                     height: 30,
                     child: TextField(
+                      controller: recipeNameController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderSide:
@@ -85,9 +95,11 @@ class CreateNewRecipeView extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
                     ),
                     onPressed: () {
+                      String newRecipeId =
+                          viewModel.createRecipe(recipeNameController.text);
                       Navigator.of(context).push(
                           MaterialPageRoute(builder: (BuildContext context) {
-                        return AddNewItemToRecipe();
+                        return AddNewItemToRecipe(recipeId: newRecipeId);
                       }));
                     },
                     child: const Text('Done'),

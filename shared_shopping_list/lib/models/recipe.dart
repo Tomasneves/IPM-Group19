@@ -10,7 +10,6 @@ class RecipeItem {
   });
 }
 
-
 class Recipe {
   final String id = const Uuid().v4();
   final String recipeName;

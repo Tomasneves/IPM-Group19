@@ -11,6 +11,7 @@ import 'package:shared_shopping_list/UI/screens/shopping_lists/shopping_lists_vi
 import 'package:shared_shopping_list/UI/screens/recipes_list/create_new_recipe_view.dart';
 import 'package:shared_shopping_list/UI/screens/recipes_list/create_new_recipe_view.dart';
 import 'package:stacked/stacked.dart';
+import 'package:shared_shopping_list/models/recipe.dart';
 
 class RecipesListView extends ViewModelBuilderWidget<RecipesListViewModel> {
   const RecipesListView({Key? key}) : super(key: key);
@@ -22,15 +23,7 @@ class RecipesListView extends ViewModelBuilderWidget<RecipesListViewModel> {
   @override
   Widget builder(
       BuildContext context, RecipesListViewModel viewModel, Widget? child) {
-    return FirstPage();
-  }
-}
-
-class FirstPage extends StatelessWidget {
-  const FirstPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
+    List<Recipe> recipes = viewModel.getAllRecipe();
     return Scaffold(
       body: Container(
         alignment: Alignment.topCenter,
@@ -56,6 +49,13 @@ class FirstPage extends StatelessWidget {
                       child: const Text('add new'))
                 ],
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              Column(
+                children:
+                    recipes.map((e) => InkWell(child: Text('oal'))).toList(),
+              )
             ],
           ),
         ),
