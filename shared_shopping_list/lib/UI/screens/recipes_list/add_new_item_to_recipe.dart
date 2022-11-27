@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:shared_shopping_list/UI/screens/recipes_list/recipes_list_viewmodel.dart';
+import 'package:shared_shopping_list/UI/screens/recipes_list/recipes_list_view.dart';
 import 'package:shared_shopping_list/UI/global/green_button.dart';
 import 'package:shared_shopping_list/UI/global/rounded_outlined_card.dart';
 import 'package:shared_shopping_list/UI/global/screen_header.dart';
@@ -9,17 +9,96 @@ import 'package:shared_shopping_list/UI/screens/shopping_lists/local_widgets/sho
 import 'package:shared_shopping_list/UI/screens/recipes_list/add_new_item_to_recipemodel.dart';
 import 'package:stacked/stacked.dart';
 
-class AddNewItemToRecipe
-    extends ViewModelBuilderWidget<AddNewItemToRecipeModel> {
-  const AddNewItemToRecipe({Key? key}) : super(key: key);
+class AddNewItemToRecipe extends StatelessWidget {
+  const AddNewItemToRecipe({super.key});
 
   @override
-  AddNewItemToRecipeModel viewModelBuilder(BuildContext context) =>
-      AddNewItemToRecipeModel();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.topCenter,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 80),
+              Row(
+                children: [
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return FirstPage();
+                        }));
+                      },
+                      child: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.black,
+                      ))
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  const ScreenHeader(text: 'Lasagna'),
+                ],
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                      primary: Color.fromARGB(255, 45, 196, 50),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return FourthPage();
+                      }));
+                    },
+                    child: const Text('+ Add new item'),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 340),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.blue,
+                      padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return FirstPage();
+                      }));
+                    },
+                    child: const Text('Done'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    ;
+  }
+}
+
+class FourthPage extends StatelessWidget {
+  const FourthPage({super.key});
 
   @override
-  Widget builder(
-      BuildContext context, AddNewItemToRecipeModel viewModel, Widget? child) {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         alignment: Alignment.topCenter,
@@ -27,7 +106,25 @@ class AddNewItemToRecipe
           child: SizedBox(
             width: 339,
             child: Column(children: [
-              const SizedBox(height: 140),
+              const SizedBox(height: 80),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return AddNewItemToRecipe();
+                      }));
+                    },
+                    child: Icon(
+                      Icons.close,
+                      color: Colors.black,
+                    ),
+                    style: TextButton.styleFrom(padding: EdgeInsets.all(0)),
+                  ),
+                ],
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -46,13 +143,14 @@ class AddNewItemToRecipe
               const SizedBox(height: 40),
               const SizedBox(
                 width: 339,
+                height: 40,
                 child: TextField(
-                  style: TextStyle(height: 1),
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderSide: BorderSide(width: 3, color: Colors.white)),
-                    hintText: 'Item Description',
                     hintStyle: TextStyle(color: Colors.white),
+                    hintText: 'Item Description',
+                    contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                     filled: true,
                     fillColor: Color.fromARGB(255, 198, 198, 198),
                   ),
@@ -109,7 +207,12 @@ class AddNewItemToRecipe
                       primary: Colors.blue,
                       padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return AddNewItemToRecipe();
+                      }));
+                    },
                     child: const Text('Done'),
                   ),
                 ],
@@ -119,5 +222,6 @@ class AddNewItemToRecipe
         ),
       ),
     );
+    ;
   }
 }
