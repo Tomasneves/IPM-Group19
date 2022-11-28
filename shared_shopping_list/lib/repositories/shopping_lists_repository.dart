@@ -10,8 +10,7 @@ import 'package:stacked/stacked.dart';
 
 class ShoppingListsRepository with ReactiveServiceMixin {
   final _randomGeneratorService = locator<RandomGeneratorService>();
-  late final _allShoppingLists =
-      _randomGeneratorService.generateShoppingLists();
+  late final _allShoppingLists = _randomGeneratorService.generateShoppingLists();
 
   List<ShoppingList> getAllShoppingLists() {
     return _allShoppingLists;
@@ -19,37 +18,28 @@ class ShoppingListsRepository with ReactiveServiceMixin {
 
   void deleteItemFromShoppingList(String id, int index) {
     setState(() {
-      _allShoppingLists
-          .singleWhere((element) => element.id == id)
-          .items
-          .removeAt(index);
+      _allShoppingLists.singleWhere((element) => element.id == id).items.removeAt(index);
     });
   }
 
-  void removeParticipantFromShoppingList(String id, int index) {
-    setState(() {
-      _allShoppingLists
-          .singleWhere((element) => element.id == id)
-          .participantNames
-          .removeAt(index);
-    });
-  }
+  // void removeParticipantFromShoppingList(String id, int index) {
+  //   setState(() {
+  //     _allShoppingLists
+  //         .singleWhere((element) => element.id == id)
+  //         .participantNames
+  //         .removeAt(index);
+  //   });
+  // }
 
   void addItemToShoppingList(String id, Item item) {
     setState(() {
-      _allShoppingLists
-          .singleWhere((element) => element.id == id)
-          .items
-          .add(item);
+      _allShoppingLists.singleWhere((element) => element.id == id).items.add(item);
     });
   }
 
   void addItemsToShoppingList(String id, List<Item> items) {
     setState(() {
-      _allShoppingLists
-          .singleWhere((element) => element.id == id)
-          .items
-          .addAll(items);
+      _allShoppingLists.singleWhere((element) => element.id == id).items.addAll(items);
     });
   }
 

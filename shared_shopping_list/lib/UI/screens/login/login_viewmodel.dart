@@ -11,12 +11,8 @@ class LoginViewModel extends BaseViewModel {
   final _randomGeneratorService = locator<RandomGeneratorService>();
   final _navigationService = locator<NavigationService>();
 
-  ShoppingList getListById(String id){
+  ShoppingList getListById(String id) {
     return _shoppingListsRepository.getListById(id);
-  }
-
-  void removeParticipant(String listId, int index) {
-    _shoppingListsRepository.removeParticipantFromShoppingList(listId, index);
   }
 
   void addNewRandomShoppingListAndGoBack() {
@@ -24,7 +20,5 @@ class LoginViewModel extends BaseViewModel {
     _shoppingListsRepository.addNewShoppingList(newShoppingList);
 
     _navigationService.back();
-
-
   }
 }

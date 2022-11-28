@@ -41,7 +41,16 @@ class CreateOrUpdateShoppingListViewModel extends ReactiveViewModel {
   }
 
   void removeParticipant(String listId, int index) {
-    _shoppingListsRepository.removeParticipantFromShoppingList(listId, index);
+    // _shoppingListsRepository.removeParticipantFromShoppingList(listId, index);
+    final participant = _currentEditingShoppingList.participantNames[index];
+
+    setState(() {
+      _currentEditingShoppingList = _currentEditingShoppingList.copyWith(
+        participantNames: [
+          ..._currentEditingShoppingList.participantNames.where((e) => e != participant)
+        ],
+      );
+    });
   }
 
   void addNewRandomShoppingListAndGoBack() {
@@ -94,9 +103,5 @@ class CreateOrUpdateShoppingListViewModel extends ReactiveViewModel {
 
   ShoppingList getListById(String id) {
     return _shoppingListsRepository.getListById(id);
-  }
-
-  void removeItem(String listId, int index) {
-    _shoppingListsRepository.removeParticipantFromShoppingList(listId, index);
   }
 }

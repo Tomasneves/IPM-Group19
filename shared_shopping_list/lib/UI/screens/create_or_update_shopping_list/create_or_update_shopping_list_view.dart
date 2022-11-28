@@ -168,12 +168,11 @@ class CreateOrUpdateShoppingListView
                                   .map((e) => DataRow(cells: <DataCell>[
                                         DataCell(Text(e)),
                                         DataCell(DeleteFromListButton(
-                                          listId: existingShoppingListId!,
-                                          id: viewModel
-                                              .getListById(existingShoppingListId!)
-                                              .participantNames
+                                          listId: viewModel.currentEditingShoppingList.id,
+                                          id: viewModel.currentEditingShoppingList.participantNames
                                               .indexOf(e),
-                                          deletePress: viewModel.removeItem,
+                                          // deletePress: viewModel.removeItem,
+                                          deletePress: viewModel.removeParticipant,
                                         ))
                                       ]))
                                   .toList(),
