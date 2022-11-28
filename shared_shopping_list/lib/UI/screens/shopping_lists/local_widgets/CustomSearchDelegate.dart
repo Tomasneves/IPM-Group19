@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shared_shopping_list/app/app.locator.dart';
+import 'package:shared_shopping_list/services/random_generator_service.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
-// Demo list to show querying
-  List<String> searchTerms = [
-    "Apple",
-    "Banana",
-    "Mango",
-    "Pear",
-    "Watermelons",
-    "Blueberries",
-    "Pineapples",
-    "Strawberries"
-  ];
+  final _randomGeneratorService = locator<RandomGeneratorService>();
 
 // first overwrite to
 // clear the search text
@@ -42,17 +34,23 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     List<String> matchQuery = [];
-    for (var fruit in searchTerms) {
-      if (fruit.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(fruit);
+    for (var person in _randomGeneratorService.allPeopleNames) {
+      if (person.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(person);
       }
     }
     return ListView.builder(
       itemCount: matchQuery.length,
       itemBuilder: (context, index) {
         var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
+        return InkWell(
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
+            close(context, result);
+          },
+          child: ListTile(
+            title: Text(result),
+          ),
         );
       },
     );
@@ -63,17 +61,23 @@ class CustomSearchDelegate extends SearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     List<String> matchQuery = [];
-    for (var fruit in searchTerms) {
-      if (fruit.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(fruit);
+    for (var person in _randomGeneratorService.allPeopleNames) {
+      if (person.toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(person);
       }
     }
     return ListView.builder(
       itemCount: matchQuery.length,
       itemBuilder: (context, index) {
         var result = matchQuery[index];
-        return ListTile(
-          title: Text(result),
+        return InkWell(
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
+            close(context, result);
+          },
+          child: ListTile(
+            title: Text(result),
+          ),
         );
       },
     );
