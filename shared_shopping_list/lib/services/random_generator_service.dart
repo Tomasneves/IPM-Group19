@@ -40,7 +40,8 @@ class RandomGeneratorService {
   };
 
   final allRecipesNames = [
-    'Lasagna',
+    'Brownies'
+    'Best food',
     'Cari Chicken',
     'Spaghetti Carbonara',
     "Mom's spaghetti",
@@ -81,7 +82,7 @@ class RandomGeneratorService {
     items.add(RecipeItem(itemName: "Tomato Sauce", itemAmount: "200ml"));
     items.add(RecipeItem(itemName: "Lasagna noodles", itemAmount: "500g"));
     list.add(Recipe(recipeName: "Lasagna", items: items));
-    list.addAll(List.generate(5, (index) => generateRecipe()));
+    list.addAll(List.generate(3, (index) => generateRecipe()));
     return list;
   } 
 

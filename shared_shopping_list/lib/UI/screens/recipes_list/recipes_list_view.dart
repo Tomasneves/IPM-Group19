@@ -12,6 +12,7 @@ import 'package:shared_shopping_list/UI/screens/recipes_list/create_new_recipe_v
 import 'package:shared_shopping_list/UI/screens/recipes_list/create_new_recipe_view.dart';
 import 'package:stacked/stacked.dart';
 import 'package:shared_shopping_list/models/recipe.dart';
+import 'package:shared_shopping_list/UI/global/recipe_box.dart';
 
 class RecipesListView extends ViewModelBuilderWidget<RecipesListViewModel> {
   const RecipesListView({Key? key}) : super(key: key);
@@ -27,34 +28,52 @@ class RecipesListView extends ViewModelBuilderWidget<RecipesListViewModel> {
     return Scaffold(
       body: Container(
         alignment: Alignment.topCenter,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(height: 120),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  const ScreenHeader(text: 'My Recipes'),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 45, 196, 50),
-                          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                          textStyle: const TextStyle(fontSize: 18)),
-                      onPressed: () {
-                        viewModel.goToCreateNewRecipeScreen();
-                      },
-                      child: const Text('add new'))
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Column(
-                children:
-                    recipes.map((e) => InkWell(child: Text(e.recipeName))).toList(),
-              )
-            ],
-          ),
+        child: Column(
+          children: [
+            const SizedBox(height: 120),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                const ScreenHeader(text: 'My Recipes'),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 45, 196, 50),
+                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                        textStyle: const TextStyle(fontSize: 18)),
+                    onPressed: () {
+                      viewModel.goToCreateNewRecipeScreen();
+                    },
+                    child: const Text('add new'))
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            /*GridView.count(
+              primary: false,
+              //childAspectRatio: (1 / .7),
+              crossAxisCount: 2,
+              //crossAxisSpacing: 50,
+              //mainAxisSpacing: 30,
+              children:
+                recipes.map((e) => InkWell(
+                  onTap: () => viewModel.goToEditRecipe(e.id),
+                  child: RecipeBox(
+                      recipe: e,
+                    ),)).toList(),
+            ),*/
+            Column(
+              children:
+                  recipes.map((e) => Padding(
+                    padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+                    child: InkWell(
+                      onTap: () => viewModel.goToEditRecipe(e.id),
+                      child: RecipeBox(
+                          recipe: e,
+                        ),),
+                  )).toList(),
+            )
+          ],
         ),
       ),
     );

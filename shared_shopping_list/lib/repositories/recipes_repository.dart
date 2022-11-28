@@ -43,6 +43,15 @@ class RecipesRepository with ReactiveServiceMixin {
     });
   }
 
+  void deleteItemFromRecipe(String id, int index){
+    setState(() {
+      _allRecipes
+          .singleWhere((element) => element.id == id)
+          .items
+          .removeAt(index);
+    });
+  }
+
   Recipe getRecipeById(String id) {
     return _allRecipes.singleWhere((element) => element.id == id);
   }

@@ -15,7 +15,7 @@ class CreateNewRecipeViewModel extends BaseViewModel {
     return newRecipe.id;
   }
 
-    void goToAddNewItemToRecipeScreen(String id) {
-      _navigationService.navigateToAddNewItemToRecipe(recipeId: id);
+  void goToAddNewItemToRecipeScreen(String id) {
+    _navigationService.navigateToAddNewItemToRecipe(recipeId: id);
   }
 }

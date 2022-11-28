@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_shopping_list/UI/global/blue_button.dart';
+import 'package:shared_shopping_list/UI/global/delete_from_list_button.dart';
 import 'package:shared_shopping_list/UI/global/rounded_outlined_card.dart';
 import 'package:shared_shopping_list/UI/global/screen_header.dart';
 import 'package:shared_shopping_list/UI/global/blue_button.dart';
 import 'package:shared_shopping_list/UI/screens/create_or_update_shopping_list/create_or_update_shopping_list_viewmodel.dart';
-import 'package:shared_shopping_list/UI/screens/create_or_update_shopping_list/remove_from_list_button.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -196,10 +196,10 @@ class CreateOrUpdateShoppingListView
                                         .map((e) =>
                                         DataRow(cells: <DataCell>[
                                           DataCell(Text(e)),
-                                          DataCell(RemoveFromListButton(
+                                          DataCell(DeleteFromListButton(
                                             listId: existingShoppingListId!,
                                             id: viewModel.getListById(existingShoppingListId!).participantNames.indexOf(e),
-                                            removePress: viewModel.removeItem,
+                                            deletePress: viewModel.removeItem,
                                           ))                                        ]))
                                         .toList(),
                                   ),

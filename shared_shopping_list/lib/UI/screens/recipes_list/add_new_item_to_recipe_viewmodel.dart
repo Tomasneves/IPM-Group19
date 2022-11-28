@@ -5,9 +5,12 @@ import 'package:shared_shopping_list/models/recipe.dart';
 import 'package:shared_shopping_list/repositories/recipes_repository.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class AddNewItemToRecipeModel extends BaseViewModel {
+class AddNewItemToRecipeModel extends ReactiveViewModel {
   final _recipesRepository = locator<RecipesRepository>();
   final _navigationService = locator<NavigationService>();
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_recipesRepository];
 
   Recipe getRecipe(String id) {
     return _recipesRepository.getRecipeById(id);
@@ -15,6 +18,10 @@ class AddNewItemToRecipeModel extends BaseViewModel {
 
   List<RecipeItem> getAllRecipeItems(String id) {
     return _recipesRepository.getRecipeById(id).items;
+  }
+
+  void deleteItem(String recipeId, int index) {
+    _recipesRepository.deleteItemFromRecipe(recipeId, index);
   }
 
   void goToAddNewItemToRecipe2Screen(String id) {
@@ -27,9 +34,12 @@ class AddNewItemToRecipeModel extends BaseViewModel {
   }
 }
 
-class AddNewItemToRecipeModel2 extends BaseViewModel {
+class AddNewItemToRecipeModel2 extends ReactiveViewModel {
   final _recipesRepository = locator<RecipesRepository>();
   final _navigationService = locator<NavigationService>();
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_recipesRepository];
 
   Recipe getRecipe(String id) {
     return _recipesRepository.getRecipeById(id);

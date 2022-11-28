@@ -6,10 +6,13 @@ import 'package:shared_shopping_list/services/random_generator_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class CreateOrUpdateShoppingListViewModel extends BaseViewModel {
+class CreateOrUpdateShoppingListViewModel extends ReactiveViewModel {
   final _shoppingListsRepository = locator<ShoppingListsRepository>();
   final _randomGeneratorService = locator<RandomGeneratorService>();
   final _navigationService = locator<NavigationService>();
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_shoppingListsRepository];
 
   late ShoppingList _currentEditingShoppingList;
 

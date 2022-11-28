@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:shared_shopping_list/UI/global/delete_from_list_button.dart';
 import 'package:shared_shopping_list/UI/screens/recipes_list/recipes_list_view.dart';
 import 'package:shared_shopping_list/UI/global/green_button.dart';
 import 'package:shared_shopping_list/UI/global/screen_header.dart';
@@ -40,34 +41,37 @@ class AddNewItemToRecipe
               const SizedBox(
                 height: 30,
               ),
-              Column(
-                children: recipeItems
-                    .map((e) => InkWell(
-                          child: Column(children: [
-                            Container(
-                              padding:
-                                  const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 216, 215, 215),
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              child: SizedBox(
-                                width: 299,
-                                child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text('${e.itemName} ${e.itemAmount}'),
-                                      const Icon(Icons.close),
-                                    ]),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                          ]),
-                        ))
-                    .toList(),
+              DataTable(
+                    columns: const <DataColumn>[
+                      DataColumn(
+                        label: Expanded(
+                          child: Text(
+                            'Item',
+                            style: TextStyle(fontStyle: FontStyle.italic),
+                          ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Expanded(
+                          child: Text(
+                            'Amount',
+                            style: TextStyle(fontStyle: FontStyle.italic),
+                          ),
+                        ),
+                      ),
+                      DataColumn(label: Text(' '))
+                    ],
+                    rows: recipeItems
+                        .map((e) => DataRow(cells: <DataCell>[
+                              DataCell(Text(e.itemName)),
+                              DataCell(Text(e.itemAmount)),
+                              DataCell(DeleteFromListButton(
+                                listId: recipeId,
+                                id: recipeItems.indexOf(e),
+                                deletePress: viewModel.deleteItem,
+                              ))
+                            ]))
+                        .toList(),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -19,4 +19,8 @@ class RecipesListViewModel extends ReactiveViewModel {
   void goToCreateNewRecipeScreen() {
     _navigationService.navigateToCreateNewRecipeView();
   }
+
+  void goToEditRecipe(String id) {
+    _navigationService.navigateToAddNewItemToRecipe(recipeId: id);
+  }
 }

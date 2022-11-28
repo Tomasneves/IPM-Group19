@@ -11,7 +11,7 @@ import 'package:flutter/cupertino.dart';
 
 import '../../../constants/custom_colors.dart';
 import '../../global/default_button.dart';
-import '../shopping_list/local_widgets/delete_from_list_button.dart';
+import '../../global/delete_from_list_button.dart';
 import 'login_viewmodel.dart';
 
 class LoginView extends ViewModelBuilderWidget<LoginViewModel> {

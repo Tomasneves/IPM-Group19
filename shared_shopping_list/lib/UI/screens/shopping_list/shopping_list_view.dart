@@ -5,7 +5,7 @@ import 'package:shared_shopping_list/UI/global/screen_header.dart';
 import 'package:shared_shopping_list/UI/screens/shopping_list/shopping_list_viewmodel.dart';
 import 'package:stacked/stacked.dart';
 import 'package:shared_shopping_list/extensions/extensions.dart';
-import 'package:shared_shopping_list/UI/screens/shopping_list/local_widgets/delete_from_list_button.dart';
+import 'package:shared_shopping_list/UI/global/delete_from_list_button.dart';
 
 class ShoppingListView extends ViewModelBuilderWidget<ShoppingListViewModel> {
   final String listId;
