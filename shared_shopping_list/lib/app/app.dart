@@ -3,6 +3,7 @@
 
 import 'package:shared_shopping_list/UI/screens/create_or_update_shopping_list/create_or_update_shopping_list_view.dart';
 import 'package:shared_shopping_list/UI/screens/home/home_view.dart';
+import 'package:shared_shopping_list/UI/screens/login/login_view.dart';
 import 'package:shared_shopping_list/UI/screens/recipes_list/add_new_item_to_recipe_view.dart';
 import 'package:shared_shopping_list/UI/screens/recipes_list/edit_recipe_view.dart';
 import 'package:shared_shopping_list/UI/screens/recipes_list/recipes_list_view.dart';
@@ -22,7 +23,8 @@ import 'package:shared_shopping_list/UI/screens/recipes_list/new_recipe_name_vie
 // It will regenerate app.locator.dart and app.router.dart files
 
 @StackedApp(routes: [
-  MaterialRoute(page: HomeView, initial: true),
+  MaterialRoute(page: LoginView, initial: true),
+  MaterialRoute(page: HomeView),
   MaterialRoute(page: ShoppingListView),
   MaterialRoute(page: RecipesListView),
   MaterialRoute(page: CreateOrUpdateShoppingListView),
