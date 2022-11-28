@@ -36,8 +36,7 @@ class CreateOrUpdateShoppingListViewModel extends ReactiveViewModel {
         participantNames: [],
       );
     } else {
-      _currentEditingShoppingList =
-          _shoppingListsRepository.getListById(existingShoppingListId);
+      _currentEditingShoppingList = _shoppingListsRepository.getListById(existingShoppingListId);
     }
   }
 
@@ -58,15 +57,14 @@ class CreateOrUpdateShoppingListViewModel extends ReactiveViewModel {
   }
 
   void saveChangesToShoppingListAndGoBack() {
-    _shoppingListsRepository
-        .updateExistingShoppingList(currentEditingShoppingList);
+    _shoppingListsRepository.updateExistingShoppingList(currentEditingShoppingList);
     _navigationService.back();
   }
 
   void updateTimeOfShoppingList(DateTime newDateTime) {
     setState(() {
-      _currentEditingShoppingList = _currentEditingShoppingList.copyWith(
-          timeOfPlannedShopping: newDateTime);
+      _currentEditingShoppingList =
+          _currentEditingShoppingList.copyWith(timeOfPlannedShopping: newDateTime);
     });
   }
 
@@ -80,10 +78,17 @@ class CreateOrUpdateShoppingListViewModel extends ReactiveViewModel {
     });
   }
 
+  void addParticipantToShoppingList(String person) {
+    setState(() {
+      _currentEditingShoppingList = _currentEditingShoppingList.copyWith(
+        participantNames: [..._currentEditingShoppingList.participantNames, person],
+      );
+    });
+  }
+
   void updateShopNameOfShoppingList(String value) {
     setState(() {
-      _currentEditingShoppingList =
-          _currentEditingShoppingList.copyWith(shopName: value);
+      _currentEditingShoppingList = _currentEditingShoppingList.copyWith(shopName: value);
     });
   }
 
