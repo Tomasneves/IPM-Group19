@@ -3,10 +3,8 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:shared_shopping_list/UI/screens/recipes_list/recipes_list_view.dart';
 import 'package:shared_shopping_list/UI/global/green_button.dart';
-import 'package:shared_shopping_list/UI/global/rounded_outlined_card.dart';
 import 'package:shared_shopping_list/UI/global/screen_header.dart';
-import 'package:shared_shopping_list/UI/screens/shopping_lists/local_widgets/shopping_list_brief_info.dart';
-import 'package:shared_shopping_list/UI/screens/recipes_list/add_new_item_to_recipemodel.dart';
+import 'package:shared_shopping_list/UI/screens/recipes_list/add_new_item_to_recipe_viewmodel.dart';
 import 'package:shared_shopping_list/models/recipe.dart';
 import 'package:stacked/stacked.dart';
 
@@ -23,33 +21,16 @@ class AddNewItemToRecipe
   @override
   Widget builder(
       BuildContext context, AddNewItemToRecipeModel viewModel, Widget? child) {
-    List<RecipeItem> recipeItem = viewModel.getAllRecipeItems(recipeId);
+    List<RecipeItem> recipeItems = viewModel.getAllRecipeItems(recipeId);
 
     return Scaffold(
+      appBar: AppBar(),
       body: Container(
         alignment: Alignment.topCenter,
         child: SingleChildScrollView(
           child: Column(
             children: [
               const SizedBox(height: 80),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (BuildContext context) {
-                          return RecipesListView();
-                        }));
-                      },
-                      child: const Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.black,
-                      ))
-                ],
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -60,14 +41,14 @@ class AddNewItemToRecipe
                 height: 30,
               ),
               Column(
-                children: recipeItem
+                children: recipeItems
                     .map((e) => InkWell(
                           child: Column(children: [
                             Container(
                               padding:
                                   const EdgeInsets.fromLTRB(20, 10, 20, 10),
                               decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 216, 215, 215),
+                                color: const Color.fromARGB(255, 216, 215, 215),
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               child: SizedBox(
@@ -76,7 +57,7 @@ class AddNewItemToRecipe
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(e.itemName + ' ' + e.itemAmount),
+                                      Text('${e.itemName} ${e.itemAmount}'),
                                       const Icon(Icons.close),
                                     ]),
                               ),
@@ -93,14 +74,11 @@ class AddNewItemToRecipe
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-                      primary: Color.fromARGB(255, 45, 196, 50),
+                      padding: const EdgeInsets.fromLTRB(30, 10, 30, 10), 
+                      backgroundColor: const Color.fromARGB(255, 45, 196, 50),
                     ),
                     onPressed: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (BuildContext context) {
-                        return AddNewItemToRecipe2(recipeId: recipeId);
-                      }));
+                      viewModel.goToAddNewItemToRecipe2Screen(recipeId);
                     },
                     child: const Text('+ Add new item'),
                   ),
@@ -112,14 +90,11 @@ class AddNewItemToRecipe
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.blue,
+                      backgroundColor: Colors.blue,
                       padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
                     ),
                     onPressed: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (BuildContext context) {
-                        return RecipesListView();
-                      }));
+                      viewModel.goBack();
                     },
                     child: const Text('Done'),
                   ),
@@ -130,7 +105,6 @@ class AddNewItemToRecipe
         ),
       ),
     );
-    ;
   }
 }
 
@@ -148,7 +122,10 @@ class AddNewItemToRecipe2
   Widget builder(
       BuildContext context, AddNewItemToRecipeModel2 viewModel, Widget? child) {
     TextEditingController itemNameController = TextEditingController();
+    TextEditingController itemAmountController = TextEditingController();
+
     return Scaffold(
+      appBar: AppBar(),
       body: Container(
         alignment: Alignment.topCenter,
         child: SingleChildScrollView(
@@ -157,37 +134,16 @@ class AddNewItemToRecipe2
             child: Column(children: [
               const SizedBox(height: 80),
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (BuildContext context) {
-                        return AddNewItemToRecipe(
-                          recipeId: '2',
-                        );
-                      }));
-                    },
-                    child: Icon(
-                      Icons.close,
-                      color: Colors.black,
-                    ),
-                    style: TextButton.styleFrom(padding: EdgeInsets.all(0)),
-                  ),
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: const [
+                  ScreenHeader(text: 'Adding New Item'),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  const ScreenHeader(text: 'Adding New Item'),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    'To Lasagna Recipie',
-                    style: TextStyle(color: Colors.grey, fontSize: 20),
+                  Text("to ${viewModel.getRecipe(recipeId).recipeName}",
+                    style: const TextStyle(color: Colors.grey, fontSize: 20),
                   ),
                 ],
               ),
@@ -196,22 +152,29 @@ class AddNewItemToRecipe2
                 width: 339,
                 height: 40,
                 child: TextField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderSide: BorderSide(width: 3, color: Colors.white)),
-                    hintStyle: TextStyle(color: Colors.white),
-                    hintText: 'Item Description',
-                    contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                    filled: true,
-                    fillColor: Color.fromARGB(255, 198, 198, 198),
-                  ),
                   controller: itemNameController,
+                  decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Item name',
+                      ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              SizedBox(
+                width: 339,
+                height: 40,
+                child: TextField(
+                  controller: itemAmountController,
+                  decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Amount',
+                      ),
                 ),
               ),
               const SizedBox(height: 30),
               const SizedBox(
                 width: 339,
-                child: const Text(
+                child: Text(
                   'Suggestions:',
                   style: TextStyle(color: Colors.grey),
                 ),
@@ -221,16 +184,11 @@ class AddNewItemToRecipe2
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(255, 198, 198, 198),
+                      backgroundColor: const Color.fromARGB(255, 198, 198, 198),
                     ),
                     onPressed: () {
-                      viewModel.getRecipe(recipeId).items.add(RecipeItem(
-                          itemName: 'Tomato Sauce', itemAmount: '200ml'));
-
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (BuildContext context) {
-                        return AddNewItemToRecipe(recipeId: recipeId);
-                      }));
+                      itemNameController.text = "Tomato Sauce";
+                      itemAmountController.text = "200ml";
                     },
                     child: const Text('Tomato Sauce 200ml'),
                   ),
@@ -240,16 +198,11 @@ class AddNewItemToRecipe2
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(255, 198, 198, 198),
+                      backgroundColor: const Color.fromARGB(255, 198, 198, 198),
                     ),
                     onPressed: () {
-                      viewModel.getRecipe(recipeId).items.add(
-                          RecipeItem(itemName: 'Pasta', itemAmount: '300g'));
-
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (BuildContext context) {
-                        return AddNewItemToRecipe(recipeId: recipeId);
-                      }));
+                      itemNameController.text = "Pasta";
+                      itemAmountController.text = "300g";
                     },
                     child: const Text('Pasta 300g'),
                   ),
@@ -259,38 +212,27 @@ class AddNewItemToRecipe2
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromARGB(255, 198, 198, 198),
+                      backgroundColor: const Color.fromARGB(255, 198, 198, 198),
                     ),
                     onPressed: () {
-                      viewModel.getRecipe(recipeId).items.add(RecipeItem(
-                          itemName: 'Olive Oil', itemAmount: '500ml'));
-
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (BuildContext context) {
-                        return AddNewItemToRecipe(recipeId: recipeId);
-                      }));
+                      itemNameController.text = "Olive Oil";
+                      itemAmountController.text = "500ml";
                     },
                     child: const Text('Olive Oil 500ml'),
                   ),
                 ],
               ),
-              SizedBox(height: 70),
+              const SizedBox(height: 70),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.blue,
+                      backgroundColor: Colors.blue,
                       padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
                     ),
                     onPressed: () {
-                      viewModel.getRecipe(recipeId).items.add(RecipeItem(
-                          itemName: itemNameController.text, itemAmount: '1g'));
-
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (BuildContext context) {
-                        return AddNewItemToRecipe(recipeId: '2');
-                      }));
+                      viewModel.addItemAndGoBack(recipeId, itemNameController.text.toString(), itemAmountController.text.toString());
                     },
                     child: const Text('Done'),
                   ),
@@ -301,6 +243,5 @@ class AddNewItemToRecipe2
         ),
       ),
     );
-    ;
   }
 }

@@ -60,9 +60,30 @@ class RandomGeneratorService {
     'Sugar': '100g',
   };
 
-  List<ShoppingList> generateShoppingLists() => List.generate(3, (index) => generateShoppingList());
+  List<ShoppingList> generateShoppingLists(){
+    List<ShoppingList> list = [];
+    list.add(ShoppingList(
+      ownerName: "Mota", 
+      listName: "Mota's", 
+      shopName: "Continente", 
+      timeOfPlannedShopping: generateDateTimeInFuture(), 
+      items: [Item(itemName: "Milk", amount: "1l", owner: "Mota")], 
+      participantNames: ["Mota", "Peter", "Henry"], 
+      currentShopper: "Mota"));
+    list.addAll(List.generate(2, (index) => generateShoppingList()));
+    return list;
+  }
+  
 
-  List<Recipe> generateRecipes() => List.generate(15, (index) => generateRecipe());
+  List<Recipe> generateRecipes() {
+    List<Recipe> list = [];
+    List<RecipeItem> items = [];
+    items.add(RecipeItem(itemName: "Tomato Sauce", itemAmount: "200ml"));
+    items.add(RecipeItem(itemName: "Lasagna noodles", itemAmount: "500g"));
+    list.add(Recipe(recipeName: "Lasagna", items: items));
+    list.addAll(List.generate(5, (index) => generateRecipe()));
+    return list;
+  } 
 
   ShoppingList generateShoppingList() {
     final owner = generatePersonName();

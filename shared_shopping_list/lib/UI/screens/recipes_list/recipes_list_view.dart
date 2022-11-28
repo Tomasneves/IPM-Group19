@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:shared_shopping_list/UI/screens/recipes_list/add_new_item_to_recipe.dart';
+import 'package:shared_shopping_list/UI/screens/recipes_list/add_new_item_to_recipe_view.dart';
 import 'package:shared_shopping_list/UI/screens/recipes_list/recipes_list_viewmodel.dart';
 import 'package:shared_shopping_list/UI/global/green_button.dart';
 import 'package:shared_shopping_list/UI/global/rounded_outlined_card.dart';
@@ -37,14 +37,11 @@ class RecipesListView extends ViewModelBuilderWidget<RecipesListViewModel> {
                   const ScreenHeader(text: 'My Recipes'),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 45, 196, 50),
+                          backgroundColor: const Color.fromARGB(255, 45, 196, 50),
                           padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                           textStyle: const TextStyle(fontSize: 18)),
                       onPressed: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (BuildContext context) {
-                          return CreateNewRecipeView();
-                        }));
+                        viewModel.goToCreateNewRecipeScreen();
                       },
                       child: const Text('add new'))
                 ],
@@ -54,13 +51,12 @@ class RecipesListView extends ViewModelBuilderWidget<RecipesListViewModel> {
               ),
               Column(
                 children:
-                    recipes.map((e) => InkWell(child: Text('oal'))).toList(),
+                    recipes.map((e) => InkWell(child: Text(e.recipeName))).toList(),
               )
             ],
           ),
         ),
       ),
     );
-    ;
   }
 }
