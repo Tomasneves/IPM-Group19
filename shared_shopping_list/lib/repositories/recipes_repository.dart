@@ -19,7 +19,7 @@ class RecipesRepository with ReactiveServiceMixin {
     return selectedRows;
   }
 
-  void changeSelecedRows(int index){
+  void changeSelectedRows(int index){
     setState(() {
       selectedRows[index] = !selectedRows[index];
     });
@@ -40,6 +40,12 @@ class RecipesRepository with ReactiveServiceMixin {
   void createNewRecipe(Recipe newRecipe) {
     setState(() {
       _allRecipes.add(newRecipe);
+    });
+  }
+
+  void addItemToRecipe(String id, RecipeItem item){
+    setState(() {
+      _allRecipes.singleWhere((element) => element.id == id).items.add(item);
     });
   }
 

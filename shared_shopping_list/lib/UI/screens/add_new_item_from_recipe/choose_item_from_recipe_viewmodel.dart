@@ -36,12 +36,11 @@ class ChooseItemFromRecipeViewModel extends ReactiveViewModel {
   }
 
   void changeSelecedRows(int index){
-    _recipesRepository.changeSelecedRows(index);
+    _recipesRepository.changeSelectedRows(index);
   }
 
   void addSelectedItemsAndGoBack(String listId, String recipeId){
     List<Item> items = [];
-    //print(_recipesRepository.getSelectedRows().length);
     for (var i = 0; i < _recipesRepository.getSelectedRows().length; i++){
       if (_recipesRepository.getSelectedRows()[i]){
         final temp = _recipesRepository.getRecipeById(recipeId).items[i];

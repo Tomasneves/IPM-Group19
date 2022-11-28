@@ -23,7 +23,7 @@ class AddNewItemToRecipeModel extends ReactiveViewModel {
 
   void addItemAndGoBack(String id, String name, String amount) {
     RecipeItem tmp = RecipeItem(itemName: name, itemAmount: amount);
-    _recipesRepository.getRecipeById(id).items.add(tmp);
+    _recipesRepository.addItemToRecipe(id, tmp);
     _navigationService.back();
   }
 }
