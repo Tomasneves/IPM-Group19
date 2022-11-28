@@ -44,7 +44,7 @@ class ShoppingListsRepository with ReactiveServiceMixin {
     });
   }
 
-    void addItemsToShoppingList(String id, List<Item> items) {
+  void addItemsToShoppingList(String id, List<Item> items) {
     setState(() {
       _allShoppingLists
           .singleWhere((element) => element.id == id)
@@ -56,6 +56,13 @@ class ShoppingListsRepository with ReactiveServiceMixin {
   void addNewShoppingList(ShoppingList newShoppingList) {
     setState(() {
       _allShoppingLists.add(newShoppingList);
+    });
+  }
+
+  void updateExistingShoppingList(ShoppingList shoppingList) {
+    final index = _allShoppingLists.indexWhere((e) => e.id == shoppingList.id);
+    setState(() {
+      _allShoppingLists[index] = shoppingList;
     });
   }
 

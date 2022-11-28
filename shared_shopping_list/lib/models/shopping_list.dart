@@ -15,7 +15,7 @@ class Item {
 }
 
 class ShoppingList {
-  final String id = const Uuid().v4();
+  final String id;
   final String ownerName;
   final String shopName;
   final String listName;
@@ -25,6 +25,7 @@ class ShoppingList {
   final String currentShopper;
 
   ShoppingList({
+    String? id,
     required this.ownerName,
     required this.listName,
     required this.shopName,
@@ -32,5 +33,28 @@ class ShoppingList {
     required this.items,
     required this.participantNames,
     required this.currentShopper,
-  });
+  }) : id = id ?? const Uuid().v4();
+
+  ShoppingList copyWith({
+    String? id,
+    String? ownerName,
+    String? shopName,
+    String? listName,
+    DateTime? timeOfPlannedShopping,
+    List<Item>? items,
+    List<String>? participantNames,
+    String? currentShopper,
+  }) {
+    return ShoppingList(
+      id: id ?? this.id,
+      ownerName: ownerName ?? this.ownerName,
+      shopName: shopName ?? this.shopName,
+      listName: listName ?? this.listName,
+      timeOfPlannedShopping:
+          timeOfPlannedShopping ?? this.timeOfPlannedShopping,
+      items: items ?? this.items,
+      participantNames: participantNames ?? this.participantNames,
+      currentShopper: currentShopper ?? this.currentShopper,
+    );
+  }
 }

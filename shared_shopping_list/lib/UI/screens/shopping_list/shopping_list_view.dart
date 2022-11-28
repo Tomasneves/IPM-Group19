@@ -8,7 +8,6 @@ import 'package:shared_shopping_list/extensions/extensions.dart';
 import 'package:shared_shopping_list/UI/screens/shopping_list/local_widgets/delete_from_list_button.dart';
 
 class ShoppingListView extends ViewModelBuilderWidget<ShoppingListViewModel> {
-  
   final String listId;
 
   const ShoppingListView(this.listId, {Key? key}) : super(key: key);
@@ -18,7 +17,8 @@ class ShoppingListView extends ViewModelBuilderWidget<ShoppingListViewModel> {
       ShoppingListViewModel();
 
   @override
-  Widget builder(BuildContext context, ShoppingListViewModel viewModel, Widget? child) {
+  Widget builder(
+      BuildContext context, ShoppingListViewModel viewModel, Widget? child) {
     final list = viewModel.getListById(listId);
 
     return Scaffold(
@@ -35,10 +35,10 @@ class ShoppingListView extends ViewModelBuilderWidget<ShoppingListViewModel> {
                 children: [
                   ScreenHeader(text: list.listName),
                   GreenButton(
-                      text: 'Edit list',
-                      onTap: () {
-                        print("clicked");
-                      }), //TODO @Bravo  Edit list from here
+                    text: 'Edit list',
+                    onTap: () =>
+                        viewModel.goToEditCurrentShoppingListScreen(listId),
+                  ),
                 ],
               ),
               const SizedBox(height: 20),
@@ -79,58 +79,57 @@ class ShoppingListView extends ViewModelBuilderWidget<ShoppingListViewModel> {
               Expanded(
                 child: SingleChildScrollView(
                   child: DataTable(
-                      columns: const <DataColumn>[
-                        DataColumn(
-                          label: Expanded(
-                            child: Text(
-                              'Item',
-                              style: TextStyle(fontStyle: FontStyle.italic),
-                            ),
+                    columns: const <DataColumn>[
+                      DataColumn(
+                        label: Expanded(
+                          child: Text(
+                            'Item',
+                            style: TextStyle(fontStyle: FontStyle.italic),
                           ),
                         ),
-                        DataColumn(
-                          label: Expanded(
-                            child: Text(
-                              'Amount',
-                              style: TextStyle(fontStyle: FontStyle.italic),
-                            ),
+                      ),
+                      DataColumn(
+                        label: Expanded(
+                          child: Text(
+                            'Amount',
+                            style: TextStyle(fontStyle: FontStyle.italic),
                           ),
                         ),
-                        DataColumn(
-                          label: Expanded(
-                            child: Text(
-                              'Added by',
-                              style: TextStyle(fontStyle: FontStyle.italic),
-                            ),
+                      ),
+                      DataColumn(
+                        label: Expanded(
+                          child: Text(
+                            'Added by',
+                            style: TextStyle(fontStyle: FontStyle.italic),
                           ),
                         ),
-                        DataColumn(label: Text(' '))
-                      ],
-                      rows: list.items
-                          .map((e) => DataRow(cells: <DataCell>[
-                                DataCell(Text(e.itemName)),
-                                DataCell(Text(e.amount)),
-                                DataCell(Text(e.owner)),
-                                DataCell(DeleteFromListButton(
-                                  listId: listId,
-                                  id: list.items.indexOf(e),
-                                  deletePress: viewModel.deleteItem,
-                                ))
-                              ]))
-                          .toList(),
+                      ),
+                      DataColumn(label: Text(' '))
+                    ],
+                    rows: list.items
+                        .map((e) => DataRow(cells: <DataCell>[
+                              DataCell(Text(e.itemName)),
+                              DataCell(Text(e.amount)),
+                              DataCell(Text(e.owner)),
+                              DataCell(DeleteFromListButton(
+                                listId: listId,
+                                id: list.items.indexOf(e),
+                                deletePress: viewModel.deleteItem,
+                              ))
+                            ]))
+                        .toList(),
                   ),
                 ),
               ),
               const SizedBox(height: 10),
               BlueButton(
                   text: "Add item",
-                  onTap: () =>
-                      viewModel.goToAddNewItemScreen(listId)),
+                  onTap: () => viewModel.goToAddNewItemScreen(listId)),
               const SizedBox(height: 10),
               BlueButton(
                   text: "Add item from recipe",
-                  onTap: () => viewModel.goToAddNewItemFromRecipeScreen(
-                      listId)),
+                  onTap: () =>
+                      viewModel.goToAddNewItemFromRecipeScreen(listId)),
               const SizedBox(height: 10),
             ],
           ),

@@ -9,7 +9,7 @@ class ShoppingListViewModel extends ReactiveViewModel {
   final _navigationService = locator<NavigationService>();
   final _shoppingListsRepository = locator<ShoppingListsRepository>();
 
-   @override
+  @override
   List<ReactiveServiceMixin> get reactiveServices => [_shoppingListsRepository];
 
   void goToAddNewItemScreen(String id) {
@@ -24,8 +24,13 @@ class ShoppingListViewModel extends ReactiveViewModel {
     _shoppingListsRepository.deleteItemFromShoppingList(listId, index);
   }
 
-  ShoppingList getListById(String id){
+  ShoppingList getListById(String id) {
     return _shoppingListsRepository.getListById(id);
   }
 
+  void goToEditCurrentShoppingListScreen(String listId) {
+    _navigationService.navigateToCreateOrUpdateShoppingListView(
+      existingShoppingListId: listId,
+    );
+  }
 }

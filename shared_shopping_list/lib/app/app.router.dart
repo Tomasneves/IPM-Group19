@@ -13,7 +13,7 @@ import 'package:shared_shopping_list/UI/screens/add_new_item_from_recipe/add_new
     as _i6;
 import 'package:shared_shopping_list/UI/screens/add_new_item_from_recipe/choose_item_from_recipe_view.dart'
     as _i7;
-import 'package:shared_shopping_list/UI/screens/create_new_shopping_list/create_new_shopping_list_view.dart'
+import 'package:shared_shopping_list/UI/screens/create_or_update_shopping_list/create_or_update_shopping_list_view.dart'
     as _i4;
 import 'package:shared_shopping_list/UI/screens/home/home_view.dart' as _i2;
 import 'package:shared_shopping_list/UI/screens/shopping_list/shopping_list_view.dart'
@@ -26,7 +26,8 @@ class Routes {
 
   static const shoppingListView = '/shopping-list-view';
 
-  static const createNewShoppingListView = '/create-new-shopping-list-view';
+  static const createOrUpdateShoppingListView =
+      '/create-or-update-shopping-list-view';
 
   static const addNewItemView = '/add-new-item-view';
 
@@ -37,7 +38,7 @@ class Routes {
   static const all = <String>{
     homeView,
     shoppingListView,
-    createNewShoppingListView,
+    createOrUpdateShoppingListView,
     addNewItemView,
     addNewItemFromRecipeView,
     chooseItemFromRecipeView,
@@ -55,8 +56,8 @@ class StackedRouter extends _i1.RouterBase {
       page: _i3.ShoppingListView,
     ),
     _i1.RouteDef(
-      Routes.createNewShoppingListView,
-      page: _i4.CreateNewShoppingListView,
+      Routes.createOrUpdateShoppingListView,
+      page: _i4.CreateOrUpdateShoppingListView,
     ),
     _i1.RouteDef(
       Routes.addNewItemView,
@@ -86,9 +87,13 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
-    _i4.CreateNewShoppingListView: (data) {
+    _i4.CreateOrUpdateShoppingListView: (data) {
+      final args =
+          data.getArgs<CreateOrUpdateShoppingListViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const _i4.CreateNewShoppingListView(),
+        builder: (context) => _i4.CreateOrUpdateShoppingListView(
+            args.existingShoppingListId,
+            key: args.key),
         settings: data,
       );
     },
@@ -133,6 +138,17 @@ class ShoppingListViewArguments {
   });
 
   final String listId;
+
+  final _i8.Key? key;
+}
+
+class CreateOrUpdateShoppingListViewArguments {
+  const CreateOrUpdateShoppingListViewArguments({
+    required this.existingShoppingListId,
+    this.key,
+  });
+
+  final String? existingShoppingListId;
 
   final _i8.Key? key;
 }
@@ -205,14 +221,18 @@ extension NavigatorStateExtension on _i9.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToCreateNewShoppingListView([
+  Future<dynamic> navigateToCreateOrUpdateShoppingListView({
+    required String? existingShoppingListId,
+    _i8.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
-    return navigateTo<dynamic>(Routes.createNewShoppingListView,
+  }) async {
+    return navigateTo<dynamic>(Routes.createOrUpdateShoppingListView,
+        arguments: CreateOrUpdateShoppingListViewArguments(
+            existingShoppingListId: existingShoppingListId, key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

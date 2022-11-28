@@ -16,7 +16,7 @@ class ShoppingListsViewModel extends ReactiveViewModel {
   List<ReactiveServiceMixin> get reactiveServices => [_shoppingListsRepository];
 
   void goToCreateNewShoppingListScreen() {
-    _navigationService.navigateTo(Routes.createNewShoppingListView);
+    _navigationService.navigateToCreateOrUpdateShoppingListView(existingShoppingListId: null);
   }
 
   void goToShoppingListScreen(String id) {

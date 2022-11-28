@@ -11,7 +11,7 @@ class ShoppingListsView extends ViewModelBuilderWidget<ShoppingListsViewModel> {
 
   @override
   ShoppingListsViewModel viewModelBuilder(BuildContext context) => ShoppingListsViewModel();
- 
+
   @override
   Widget builder(BuildContext context, ShoppingListsViewModel viewModel, Widget? child) {
     return Scaffold(

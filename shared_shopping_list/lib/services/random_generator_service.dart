@@ -26,17 +26,17 @@ class RandomGeneratorService {
   ];
 
   final allShopItems = {
-    'Milk' : '1L',
-    'Tomato sauce' : '200ml',
-    'Pasta' : '300g',
-    'Tomatoes' : '2',
-    'Water' : '0.5L',
-    'Bread' : '1',
-    'Eggs' : '6',
-    'Butter' : '1',
-    'Ham' : '15g',
-    'Toilet paper' : '10',
-    'Salad' : '1',
+    'Milk': '1L',
+    'Tomato sauce': '200ml',
+    'Pasta': '300g',
+    'Tomatoes': '2',
+    'Water': '0.5L',
+    'Bread': '1',
+    'Eggs': '6',
+    'Butter': '1',
+    'Ham': '15g',
+    'Toilet paper': '10',
+    'Salad': '1',
   };
 
   final allRecipesNames = [
@@ -50,14 +50,14 @@ class RandomGeneratorService {
   ];
 
   final allRecipeItems = {
-    'Banana' : '5',
-    'Milk' : '1l',
-    'Ketchup' : '500ml',
-    'Tomato' : '4',
-    'Chicken' : '1kg',
-    'Curry' : '20g',
-    'Flour' : '150g',
-    'Sugar' : '100g',
+    'Banana': '5',
+    'Milk': '1l',
+    'Ketchup': '500ml',
+    'Tomato': '4',
+    'Chicken': '1kg',
+    'Curry': '20g',
+    'Flour': '150g',
+    'Sugar': '100g',
   };
 
   List<ShoppingList> generateShoppingLists() => List.generate(3, (index) => generateShoppingList());
@@ -98,26 +98,29 @@ class RandomGeneratorService {
   }
 
   List<Item> generateShopItems({int minCount = 2}) {
-    var list = allShopItems.entries.map((e) => Item(itemName: e.key, amount: e.value, owner: generatePersonName())).toList();
+    var list = allShopItems.entries
+        .map((e) => Item(itemName: e.key, amount: e.value, owner: generatePersonName()))
+        .toList();
     list.shuffle();
     return list.take(minCount + Random().nextInt(allShopItems.length - 1 - minCount)).toList();
   }
 
-  Recipe generateRecipe(){
+  Recipe generateRecipe() {
     return Recipe(
       recipeName: generateRecipeName(),
       items: generateRecipeItems(),
     );
   }
 
-  String generateRecipeName(){
+  String generateRecipeName() {
     return allRecipesNames[Random().nextInt(allRecipesNames.length - 1)];
   }
 
-  List<RecipeItem> generateRecipeItems({int minCount = 2}){
-    var list = allRecipeItems.entries.map((e) => RecipeItem(itemName: e.key, itemAmount: e.value)).toList();
+  List<RecipeItem> generateRecipeItems({int minCount = 2}) {
+    var list = allRecipeItems.entries
+        .map((e) => RecipeItem(itemName: e.key, itemAmount: e.value))
+        .toList();
     list.shuffle();
     return list.take(minCount + Random().nextInt(allRecipeItems.length - 1 - minCount)).toList();
   }
-
 }
