@@ -5,8 +5,7 @@ import 'package:shared_shopping_list/models/recipe.dart';
 import 'package:shared_shopping_list/repositories/recipes_repository.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-
-class AddNewItemToRecipeModel extends ReactiveViewModel {
+class EditRecipeViewModel extends ReactiveViewModel {
   final _recipesRepository = locator<RecipesRepository>();
   final _navigationService = locator<NavigationService>();
 
@@ -21,9 +20,16 @@ class AddNewItemToRecipeModel extends ReactiveViewModel {
     return _recipesRepository.getRecipeById(id).items;
   }
 
-  void addItemAndGoBack(String id, String name, String amount) {
-    RecipeItem tmp = RecipeItem(itemName: name, itemAmount: amount);
-    _recipesRepository.getRecipeById(id).items.add(tmp);
+  void deleteItem(String recipeId, int index) {
+    _recipesRepository.deleteItemFromRecipe(recipeId, index);
+  }
+
+  void goToAddNewItemToRecipeScreen(String id) {
+    _navigationService.navigateToAddNewItemToRecipe(recipeId: id);
+  }
+
+  void goBack() {
+    _navigationService.back();
     _navigationService.back();
   }
 }

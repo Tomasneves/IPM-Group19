@@ -8,8 +8,8 @@ import 'package:shared_shopping_list/UI/global/rounded_outlined_card.dart';
 import 'package:shared_shopping_list/UI/global/screen_header.dart';
 import 'package:shared_shopping_list/UI/screens/shopping_lists/local_widgets/shopping_list_brief_info.dart';
 import 'package:shared_shopping_list/UI/screens/shopping_lists/shopping_lists_viewmodel.dart';
-import 'package:shared_shopping_list/UI/screens/recipes_list/create_new_recipe_view.dart';
-import 'package:shared_shopping_list/UI/screens/recipes_list/create_new_recipe_view.dart';
+import 'package:shared_shopping_list/UI/screens/recipes_list/new_recipe_name_view.dart';
+import 'package:shared_shopping_list/UI/screens/recipes_list/new_recipe_name_view.dart';
 import 'package:stacked/stacked.dart';
 import 'package:shared_shopping_list/models/recipe.dart';
 import 'package:shared_shopping_list/UI/global/recipe_box.dart';
@@ -41,7 +41,7 @@ class RecipesListView extends ViewModelBuilderWidget<RecipesListViewModel> {
                         padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                         textStyle: const TextStyle(fontSize: 18)),
                     onPressed: () {
-                      viewModel.goToCreateNewRecipeScreen();
+                      viewModel.goToNewRecipeNameScreen();
                     },
                     child: const Text('add new'))
               ],
@@ -70,7 +70,8 @@ class RecipesListView extends ViewModelBuilderWidget<RecipesListViewModel> {
                       onTap: () => viewModel.goToEditRecipe(e.id),
                       child: RecipeBox(
                           recipe: e,
-                        ),),
+                      ),
+                    ),
                   )).toList(),
             )
           ],

@@ -16,11 +16,11 @@ class RecipesListViewModel extends ReactiveViewModel {
     return _recipesRepository.getAllRecipes();
   }
 
-  void goToCreateNewRecipeScreen() {
-    _navigationService.navigateToCreateNewRecipeView();
+  void goToNewRecipeNameScreen() {
+    _navigationService.navigateToNewRecipeNameView();
   }
 
   void goToEditRecipe(String id) {
-    _navigationService.navigateToAddNewItemToRecipe(recipeId: id);
+    _navigationService.navigateToEditRecipeView(recipeId: id);
   }
 }

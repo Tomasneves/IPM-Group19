@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:shared_shopping_list/UI/screens/recipes_list/create_new_recipe_viewmodel.dart';
+import 'package:shared_shopping_list/UI/screens/recipes_list/new_recipe_name_viewmodel.dart';
 import 'package:shared_shopping_list/UI/screens/recipes_list/recipes_list_view.dart';
 import 'package:shared_shopping_list/UI/global/green_button.dart';
 import 'package:shared_shopping_list/UI/global/rounded_outlined_card.dart';
 import 'package:shared_shopping_list/UI/global/screen_header.dart';
 import 'package:shared_shopping_list/UI/screens/shopping_lists/local_widgets/shopping_list_brief_info.dart';
-import 'package:shared_shopping_list/UI/screens/recipes_list/create_new_recipe_viewmodel.dart';
+import 'package:shared_shopping_list/UI/screens/recipes_list/new_recipe_name_viewmodel.dart';
 import 'package:shared_shopping_list/UI/screens/recipes_list/add_new_item_to_recipe_view.dart';
 import 'package:stacked/stacked.dart';
 
-class CreateNewRecipeView
-    extends ViewModelBuilderWidget<CreateNewRecipeViewModel> {
-  CreateNewRecipeView({super.key});
+class NewRecipeNameView
+    extends ViewModelBuilderWidget<NewRecipeNameViewModel> {
+  NewRecipeNameView({super.key});
 
   @override
-  CreateNewRecipeViewModel viewModelBuilder(BuildContext context) =>
-      CreateNewRecipeViewModel();
+  NewRecipeNameViewModel viewModelBuilder(BuildContext context) =>
+      NewRecipeNameViewModel();
 
   @override
   Widget builder(
-      BuildContext context, CreateNewRecipeViewModel viewModel, Widget? child) {
+      BuildContext context, NewRecipeNameViewModel viewModel, Widget? child) {
     TextEditingController recipeNameController = TextEditingController();
 
     return Scaffold(
@@ -74,7 +74,7 @@ class CreateNewRecipeView
                     onPressed: () {
                       String newRecipeId =
                           viewModel.createRecipe(recipeNameController.text);
-                      viewModel.goToAddNewItemToRecipeScreen(newRecipeId);
+                      viewModel.goToEditRecipeScreen(newRecipeId);
                     },
                     child: const Text('Done'),
                   ),

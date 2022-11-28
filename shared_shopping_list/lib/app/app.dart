@@ -4,6 +4,7 @@
 import 'package:shared_shopping_list/UI/screens/create_or_update_shopping_list/create_or_update_shopping_list_view.dart';
 import 'package:shared_shopping_list/UI/screens/home/home_view.dart';
 import 'package:shared_shopping_list/UI/screens/recipes_list/add_new_item_to_recipe_view.dart';
+import 'package:shared_shopping_list/UI/screens/recipes_list/edit_recipe_view.dart';
 import 'package:shared_shopping_list/UI/screens/recipes_list/recipes_list_view.dart';
 import 'package:shared_shopping_list/UI/screens/shopping_list/shopping_list_view.dart';
 import 'package:shared_shopping_list/UI/screens/add_new_item/add_new_item_view.dart';
@@ -14,7 +15,7 @@ import 'package:shared_shopping_list/repositories/shopping_lists_repository.dart
 import 'package:shared_shopping_list/services/random_generator_service.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:shared_shopping_list/UI/screens/recipes_list/create_new_recipe_view.dart';
+import 'package:shared_shopping_list/UI/screens/recipes_list/new_recipe_name_view.dart';
 
 // Hey boys, if you will be adding here something you need to run this command in classic command line from the project root directory:
 //    flutter pub run build_runner watch --delete-conflicting-outputs
@@ -26,8 +27,8 @@ import 'package:shared_shopping_list/UI/screens/recipes_list/create_new_recipe_v
   MaterialRoute(page: RecipesListView),
   MaterialRoute(page: CreateOrUpdateShoppingListView),
   MaterialRoute(page: AddNewItemToRecipe),
-  MaterialRoute(page: AddNewItemToRecipe2),
-  MaterialRoute(page: CreateNewRecipeView),
+  MaterialRoute(page: EditRecipeView),
+  MaterialRoute(page: NewRecipeNameView),
   MaterialRoute(page: AddNewItemView),
   MaterialRoute(page: AddNewItemFromRecipeView),
   MaterialRoute(page: ChooseItemFromRecipeView),

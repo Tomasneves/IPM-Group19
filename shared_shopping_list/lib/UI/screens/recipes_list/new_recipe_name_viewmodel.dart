@@ -5,7 +5,7 @@ import 'package:shared_shopping_list/repositories/recipes_repository.dart';
 import 'package:shared_shopping_list/models/recipe.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class CreateNewRecipeViewModel extends BaseViewModel {
+class NewRecipeNameViewModel extends BaseViewModel {
   final _recipesRepository = locator<RecipesRepository>();
   final _navigationService = locator<NavigationService>();
 
@@ -15,7 +15,7 @@ class CreateNewRecipeViewModel extends BaseViewModel {
     return newRecipe.id;
   }
 
-  void goToAddNewItemToRecipeScreen(String id) {
-    _navigationService.navigateToAddNewItemToRecipe(recipeId: id);
+  void goToEditRecipeScreen(String id) {
+    _navigationService.navigateToEditRecipeView(recipeId: id);
   }
 }

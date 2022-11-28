@@ -5,27 +5,29 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i11;
+import 'package:flutter/material.dart' as _i12;
 import 'package:flutter/material.dart';
 import 'package:shared_shopping_list/UI/screens/add_new_item/add_new_item_view.dart'
-    as _i8;
-import 'package:shared_shopping_list/UI/screens/add_new_item_from_recipe/add_new_item_from_recipe_view.dart'
     as _i9;
-import 'package:shared_shopping_list/UI/screens/add_new_item_from_recipe/choose_item_from_recipe_view.dart'
+import 'package:shared_shopping_list/UI/screens/add_new_item_from_recipe/add_new_item_from_recipe_view.dart'
     as _i10;
+import 'package:shared_shopping_list/UI/screens/add_new_item_from_recipe/choose_item_from_recipe_view.dart'
+    as _i11;
 import 'package:shared_shopping_list/UI/screens/create_or_update_shopping_list/create_or_update_shopping_list_view.dart'
     as _i5;
 import 'package:shared_shopping_list/UI/screens/home/home_view.dart' as _i2;
 import 'package:shared_shopping_list/UI/screens/recipes_list/add_new_item_to_recipe_view.dart'
     as _i6;
-import 'package:shared_shopping_list/UI/screens/recipes_list/create_new_recipe_view.dart'
+import 'package:shared_shopping_list/UI/screens/recipes_list/edit_recipe_view.dart'
     as _i7;
+import 'package:shared_shopping_list/UI/screens/recipes_list/new_recipe_name_view.dart'
+    as _i8;
 import 'package:shared_shopping_list/UI/screens/recipes_list/recipes_list_view.dart'
     as _i4;
 import 'package:shared_shopping_list/UI/screens/shopping_list/shopping_list_view.dart'
     as _i3;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i12;
+import 'package:stacked_services/stacked_services.dart' as _i13;
 
 class Routes {
   static const homeView = '/';
@@ -39,9 +41,9 @@ class Routes {
 
   static const addNewItemToRecipe = '/add-new-item-to-recipe';
 
-  static const addNewItemToRecipe2 = '/add-new-item-to-recipe2';
+  static const editRecipeView = '/edit-recipe-view';
 
-  static const createNewRecipeView = '/create-new-recipe-view';
+  static const newRecipeNameView = '/new-recipe-name-view';
 
   static const addNewItemView = '/add-new-item-view';
 
@@ -55,8 +57,8 @@ class Routes {
     recipesListView,
     createOrUpdateShoppingListView,
     addNewItemToRecipe,
-    addNewItemToRecipe2,
-    createNewRecipeView,
+    editRecipeView,
+    newRecipeNameView,
     addNewItemView,
     addNewItemFromRecipeView,
     chooseItemFromRecipeView,
@@ -86,24 +88,24 @@ class StackedRouter extends _i1.RouterBase {
       page: _i6.AddNewItemToRecipe,
     ),
     _i1.RouteDef(
-      Routes.addNewItemToRecipe2,
-      page: _i6.AddNewItemToRecipe2,
+      Routes.editRecipeView,
+      page: _i7.EditRecipeView,
     ),
     _i1.RouteDef(
-      Routes.createNewRecipeView,
-      page: _i7.CreateNewRecipeView,
+      Routes.newRecipeNameView,
+      page: _i8.NewRecipeNameView,
     ),
     _i1.RouteDef(
       Routes.addNewItemView,
-      page: _i8.AddNewItemView,
+      page: _i9.AddNewItemView,
     ),
     _i1.RouteDef(
       Routes.addNewItemFromRecipeView,
-      page: _i9.AddNewItemFromRecipeView,
+      page: _i10.AddNewItemFromRecipeView,
     ),
     _i1.RouteDef(
       Routes.chooseItemFromRecipeView,
-      page: _i10.ChooseItemFromRecipeView,
+      page: _i11.ChooseItemFromRecipeView,
     ),
   ];
 
@@ -145,44 +147,44 @@ class StackedRouter extends _i1.RouterBase {
         settings: data,
       );
     },
-    _i6.AddNewItemToRecipe2: (data) {
-      final args = data.getArgs<AddNewItemToRecipe2Arguments>(nullOk: false);
+    _i7.EditRecipeView: (data) {
+      final args = data.getArgs<EditRecipeViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
         builder: (context) =>
-            _i6.AddNewItemToRecipe2(key: args.key, recipeId: args.recipeId),
+            _i7.EditRecipeView(key: args.key, recipeId: args.recipeId),
         settings: data,
       );
     },
-    _i7.CreateNewRecipeView: (data) {
-      final args = data.getArgs<CreateNewRecipeViewArguments>(
-        orElse: () => const CreateNewRecipeViewArguments(),
+    _i8.NewRecipeNameView: (data) {
+      final args = data.getArgs<NewRecipeNameViewArguments>(
+        orElse: () => const NewRecipeNameViewArguments(),
       );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => _i7.CreateNewRecipeView(key: args.key),
+        builder: (context) => _i8.NewRecipeNameView(key: args.key),
         settings: data,
       );
     },
-    _i8.AddNewItemView: (data) {
+    _i9.AddNewItemView: (data) {
       final args = data.getArgs<AddNewItemViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => _i8.AddNewItemView(args.listId, key: args.key),
+        builder: (context) => _i9.AddNewItemView(args.listId, key: args.key),
         settings: data,
       );
     },
-    _i9.AddNewItemFromRecipeView: (data) {
+    _i10.AddNewItemFromRecipeView: (data) {
       final args =
           data.getArgs<AddNewItemFromRecipeViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
         builder: (context) =>
-            _i9.AddNewItemFromRecipeView(args.listId, key: args.key),
+            _i10.AddNewItemFromRecipeView(args.listId, key: args.key),
         settings: data,
       );
     },
-    _i10.ChooseItemFromRecipeView: (data) {
+    _i11.ChooseItemFromRecipeView: (data) {
       final args =
           data.getArgs<ChooseItemFromRecipeViewArguments>(nullOk: false);
       return MaterialPageRoute<dynamic>(
-        builder: (context) => _i10.ChooseItemFromRecipeView(
+        builder: (context) => _i11.ChooseItemFromRecipeView(
             args.listId, args.recipeId,
             key: args.key),
         settings: data,
@@ -204,7 +206,7 @@ class ShoppingListViewArguments {
 
   final String listId;
 
-  final _i11.Key? key;
+  final _i12.Key? key;
 }
 
 class CreateOrUpdateShoppingListViewArguments {
@@ -215,7 +217,7 @@ class CreateOrUpdateShoppingListViewArguments {
 
   final String? existingShoppingListId;
 
-  final _i11.Key? key;
+  final _i12.Key? key;
 }
 
 class AddNewItemToRecipeArguments {
@@ -224,26 +226,26 @@ class AddNewItemToRecipeArguments {
     required this.recipeId,
   });
 
-  final _i11.Key? key;
+  final _i12.Key? key;
 
   final String recipeId;
 }
 
-class AddNewItemToRecipe2Arguments {
-  const AddNewItemToRecipe2Arguments({
+class EditRecipeViewArguments {
+  const EditRecipeViewArguments({
     this.key,
     required this.recipeId,
   });
 
-  final _i11.Key? key;
+  final _i12.Key? key;
 
   final String recipeId;
 }
 
-class CreateNewRecipeViewArguments {
-  const CreateNewRecipeViewArguments({this.key});
+class NewRecipeNameViewArguments {
+  const NewRecipeNameViewArguments({this.key});
 
-  final _i11.Key? key;
+  final _i12.Key? key;
 }
 
 class AddNewItemViewArguments {
@@ -254,7 +256,7 @@ class AddNewItemViewArguments {
 
   final String listId;
 
-  final _i11.Key? key;
+  final _i12.Key? key;
 }
 
 class AddNewItemFromRecipeViewArguments {
@@ -265,7 +267,7 @@ class AddNewItemFromRecipeViewArguments {
 
   final String listId;
 
-  final _i11.Key? key;
+  final _i12.Key? key;
 }
 
 class ChooseItemFromRecipeViewArguments {
@@ -279,10 +281,10 @@ class ChooseItemFromRecipeViewArguments {
 
   final String recipeId;
 
-  final _i11.Key? key;
+  final _i12.Key? key;
 }
 
-extension NavigatorStateExtension on _i12.NavigationService {
+extension NavigatorStateExtension on _i13.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -299,7 +301,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
 
   Future<dynamic> navigateToShoppingListView({
     required String listId,
-    _i11.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -330,7 +332,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
 
   Future<dynamic> navigateToCreateOrUpdateShoppingListView({
     required String? existingShoppingListId,
-    _i11.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -347,7 +349,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
   }
 
   Future<dynamic> navigateToAddNewItemToRecipe({
-    _i11.Key? key,
+    _i12.Key? key,
     required String recipeId,
     int? routerId,
     bool preventDuplicates = true,
@@ -363,8 +365,8 @@ extension NavigatorStateExtension on _i12.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToAddNewItemToRecipe2({
-    _i11.Key? key,
+  Future<dynamic> navigateToEditRecipeView({
+    _i12.Key? key,
     required String recipeId,
     int? routerId,
     bool preventDuplicates = true,
@@ -372,24 +374,24 @@ extension NavigatorStateExtension on _i12.NavigationService {
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   }) async {
-    return navigateTo<dynamic>(Routes.addNewItemToRecipe2,
-        arguments: AddNewItemToRecipe2Arguments(key: key, recipeId: recipeId),
+    return navigateTo<dynamic>(Routes.editRecipeView,
+        arguments: EditRecipeViewArguments(key: key, recipeId: recipeId),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
         transition: transition);
   }
 
-  Future<dynamic> navigateToCreateNewRecipeView({
-    _i11.Key? key,
+  Future<dynamic> navigateToNewRecipeNameView({
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
   }) async {
-    return navigateTo<dynamic>(Routes.createNewRecipeView,
-        arguments: CreateNewRecipeViewArguments(key: key),
+    return navigateTo<dynamic>(Routes.newRecipeNameView,
+        arguments: NewRecipeNameViewArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -398,7 +400,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
 
   Future<dynamic> navigateToAddNewItemView({
     required String listId,
-    _i11.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -415,7 +417,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
 
   Future<dynamic> navigateToAddNewItemFromRecipeView({
     required String listId,
-    _i11.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
@@ -433,7 +435,7 @@ extension NavigatorStateExtension on _i12.NavigationService {
   Future<dynamic> navigateToChooseItemFromRecipeView({
     required String listId,
     required String recipeId,
-    _i11.Key? key,
+    _i12.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
