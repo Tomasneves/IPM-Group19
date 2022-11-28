@@ -30,7 +30,7 @@ class ShoppingListsRepository with ReactiveServiceMixin {
     setState(() {
       _allShoppingLists
           .singleWhere((element) => element.id == id)
-          .items
+          .participantNames
           .removeAt(index);
     });
   }

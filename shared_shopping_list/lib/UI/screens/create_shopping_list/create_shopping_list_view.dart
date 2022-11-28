@@ -3,47 +3,42 @@ import 'package:shared_shopping_list/UI/global/blue_button.dart';
 import 'package:shared_shopping_list/UI/global/rounded_outlined_card.dart';
 import 'package:shared_shopping_list/UI/global/screen_header.dart';
 import 'package:shared_shopping_list/UI/global/blue_button.dart';
-import 'package:shared_shopping_list/UI/screens/create_or_update_shopping_list/create_or_update_shopping_list_viewmodel.dart';
 import 'package:shared_shopping_list/UI/screens/create_or_update_shopping_list/remove_from_list_button.dart';
+import 'package:shared_shopping_list/UI/screens/create_shopping_list/remove_from_list_button.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../../constants/custom_colors.dart';
 import '../../../models/shopping_list.dart';
 import '../../global/default_button.dart';
+import 'create_shopping_list_viewmodel.dart';
 
-class CreateOrUpdateShoppingListView
-    extends ViewModelBuilderWidget<CreateOrUpdateShoppingListViewModel> {
+class CreateShoppingListView
+    extends ViewModelBuilderWidget<CreateShoppingListViewModel> {
   final String? existingShoppingListId;
 
   final nameTextController = TextEditingController();
   final shopTextController = TextEditingController();
 
-  CreateOrUpdateShoppingListView(this.existingShoppingListId, {Key? key})
+  CreateShoppingListView(this.existingShoppingListId, {Key? key})
       : super(key: key);
 
   @override
-  CreateOrUpdateShoppingListViewModel viewModelBuilder(BuildContext context) =>
-      CreateOrUpdateShoppingListViewModel(
+  CreateShoppingListViewModel viewModelBuilder(BuildContext context) =>
+      CreateShoppingListViewModel(
         existingShoppingListId,
       );
 
   @override
-  void onViewModelReady(CreateOrUpdateShoppingListViewModel viewModel) {
+  void onViewModelReady(CreateShoppingListViewModel viewModel) {
     nameTextController.text = viewModel.currentEditingShoppingList.listName;
     shopTextController.text = viewModel.currentEditingShoppingList.shopName;
   }
 
   @override
   Widget builder(BuildContext context,
-      CreateOrUpdateShoppingListViewModel viewModel, Widget? child) {
+      CreateShoppingListViewModel viewModel, Widget? child) {
     List participants = <String>[];
-    participants.add("jose");
-    participants.add("maria");
-    if (existingShoppingListId == null) {} else {
-      final list = viewModel.getListById(existingShoppingListId!);
-      participants = list.participantNames;
-    }
 
 
 
@@ -196,10 +191,9 @@ class CreateOrUpdateShoppingListView
                                         .map((e) =>
                                         DataRow(cells: <DataCell>[
                                           DataCell(Text(e)),
-                                          DataCell(RemoveFromListButton(
-                                            listId: existingShoppingListId!,
-                                            id: viewModel.getListById(existingShoppingListId!).participantNames.indexOf(e),
-                                            removePress: viewModel.removeItem,
+                                          DataCell(RemoveParticipantButton0(
+                                            list: participants,
+                                            index: participants.indexOf(e),
                                           ))                                        ]))
                                         .toList(),
                                   ),

@@ -6,7 +6,7 @@ import 'package:shared_shopping_list/services/random_generator_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class CreateOrUpdateShoppingListViewModel extends BaseViewModel {
+class CreateShoppingListViewModel extends BaseViewModel {
   final _shoppingListsRepository = locator<ShoppingListsRepository>();
   final _randomGeneratorService = locator<RandomGeneratorService>();
   final _navigationService = locator<NavigationService>();
@@ -15,7 +15,9 @@ class CreateOrUpdateShoppingListViewModel extends BaseViewModel {
 
   ShoppingList get currentEditingShoppingList => _currentEditingShoppingList;
 
-  CreateOrUpdateShoppingListViewModel(String? existingShoppingListId) {
+  List<String> participants = <String>[];
+
+  CreateShoppingListViewModel(String? existingShoppingListId) {
     if (existingShoppingListId == null) {
       _currentEditingShoppingList = ShoppingList(
         ownerName: '',
