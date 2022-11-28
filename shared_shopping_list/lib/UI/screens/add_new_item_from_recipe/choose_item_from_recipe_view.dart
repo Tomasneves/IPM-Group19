@@ -28,55 +28,58 @@ class ChooseItemFromRecipeView
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(height: 10),
-              ScreenHeader(text: list.listName),
-              const SizedBox(height: 30),
-              SingleChildScrollView(
-                child: DataTable(
-                  showCheckboxColumn: true,
-                  columns: const <DataColumn>[
-                    DataColumn(
-                      label: Expanded(
-                        child: Text(
-                          'Item',
-                          style: TextStyle(fontStyle: FontStyle.italic),
+          child: Container(
+            alignment: Alignment.center,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 10),
+                ScreenHeader(text: list.listName),
+                const SizedBox(height: 30),
+                SingleChildScrollView(
+                  child: DataTable(
+                    showCheckboxColumn: true,
+                    columns: const <DataColumn>[
+                      DataColumn(
+                        label: Expanded(
+                          child: Text(
+                            'Item',
+                            style: TextStyle(fontStyle: FontStyle.italic),
+                          ),
                         ),
                       ),
-                    ),
-                    DataColumn(
-                      label: Expanded(
-                        child: Text(
-                          'Amount',
-                          style: TextStyle(fontStyle: FontStyle.italic),
+                      DataColumn(
+                        label: Expanded(
+                          child: Text(
+                            'Amount',
+                            style: TextStyle(fontStyle: FontStyle.italic),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                  rows: recipe.items
-                      .map((e) => DataRow(
-                            cells: <DataCell>[
-                              DataCell(Text(e.itemName)),
-                              DataCell(Text(e.itemAmount)),
-                            ],
-                            selected: selectedRows[recipe.items.indexOf(e)],
-                            onSelectChanged: (value) {
-                              final index = recipe.items.indexOf(e);
-                              viewModel.changeSelecedRows(index);
-                            },
-                          ))
-                      .toList(),
+                    ],
+                    rows: recipe.items
+                        .map((e) => DataRow(
+                              cells: <DataCell>[
+                                DataCell(Text(e.itemName)),
+                                DataCell(Text(e.itemAmount)),
+                              ],
+                              selected: selectedRows[recipe.items.indexOf(e)],
+                              onSelectChanged: (value) {
+                                final index = recipe.items.indexOf(e);
+                                viewModel.changeSelecedRows(index);
+                              },
+                            ))
+                        .toList(),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 30),
-              BlueButton(
-                text: "Add selected",
-                onTap: () =>
-                    viewModel.addSelectedItemsAndGoBack(listId, recipeId),
-              ),
-            ],
+                const SizedBox(height: 30),
+                BlueButton(
+                  text: "Add selected",
+                  onTap: () =>
+                      viewModel.addSelectedItemsAndGoBack(listId, recipeId),
+                ),
+              ],
+            ),
           ),
         )
       ),

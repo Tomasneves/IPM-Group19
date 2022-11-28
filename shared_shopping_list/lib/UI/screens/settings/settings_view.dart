@@ -30,7 +30,7 @@ class SettingsView extends ViewModelBuilderWidget<SettingsViewModel> {
           child: SizedBox(
             width: 339,
             child: Column(children: [
-              const SizedBox(height: 130),
+              const SizedBox(height: 60),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

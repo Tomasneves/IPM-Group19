@@ -26,55 +26,45 @@ class RecipesListView extends ViewModelBuilderWidget<RecipesListViewModel> {
       BuildContext context, RecipesListViewModel viewModel, Widget? child) {
     List<Recipe> recipes = viewModel.getAllRecipe();
     return Scaffold(
-      body: Container(
-        alignment: Alignment.topCenter,
-        child: Column(
-          children: [
-            const SizedBox(height: 120),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const ScreenHeader(text: 'My Recipes'),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 45, 196, 50),
-                        padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                        textStyle: const TextStyle(fontSize: 18)),
-                    onPressed: () {
-                      viewModel.goToNewRecipeNameScreen();
-                    },
-                    child: const Text('add new'))
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            /*GridView.count(
-              primary: false,
-              //childAspectRatio: (1 / .7),
-              crossAxisCount: 2,
-              //crossAxisSpacing: 50,
-              //mainAxisSpacing: 30,
-              children:
-                recipes.map((e) => InkWell(
-                  onTap: () => viewModel.goToEditRecipe(e.id),
-                  child: RecipeBox(
-                      recipe: e,
-                    ),)).toList(),
-            ),*/
-            Column(
-              children:
-                  recipes.map((e) => Padding(
-                    padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-                    child: InkWell(
-                      onTap: () => viewModel.goToEditRecipe(e.id),
-                      child: RecipeBox(
-                          recipe: e,
-                      ),
-                    ),
-                  )).toList(),
-            )
-          ],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20),
+          child: Column(
+            children: [
+              const SizedBox(height: 60),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  const ScreenHeader(text: 'My Recipes'),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color.fromARGB(255, 45, 196, 50),
+                          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                          textStyle: const TextStyle(fontSize: 18)),
+                      onPressed: () {
+                        viewModel.goToNewRecipeNameScreen();
+                      },
+                      child: const Text('add new'))
+                ],
+              ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: GridView.count(
+                    primary: false,
+                    childAspectRatio: (1 / .7),
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 50,
+                    mainAxisSpacing: 30,
+                    children:
+                      recipes.map((e) => InkWell(
+                        onTap: () => viewModel.goToEditRecipe(e.id),
+                        child: RecipeBox(
+                            recipe: e,
+                          ),)).toList(),
+                  ),
+              ),
+            ]
+          ),
         ),
       ),
     );

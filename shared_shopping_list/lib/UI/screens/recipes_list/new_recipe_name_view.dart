@@ -62,7 +62,7 @@ class NewRecipeNameView
                   ),
                 ],
               ),
-              const SizedBox(height: 360),
+              const SizedBox(height: 50),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -76,7 +76,7 @@ class NewRecipeNameView
                           viewModel.createRecipe(recipeNameController.text);
                       viewModel.goToEditRecipeScreen(newRecipeId);
                     },
-                    child: const Text('Done'),
+                    child: const Text('Next'),
                   ),
                 ],
               ),
